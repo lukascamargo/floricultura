@@ -26,13 +26,13 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton5" min="-2" pref="158" max="-2" attributes="0"/>
-                  <Component id="jButton7" min="-2" pref="158" max="-2" attributes="0"/>
+                  <Component id="btnVenda" min="-2" pref="158" max="-2" attributes="0"/>
+                  <Component id="btnCadastroProd" min="-2" pref="158" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton6" min="-2" pref="158" max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" pref="158" max="-2" attributes="0"/>
+                  <Component id="btnRelatorios" min="-2" pref="158" max="-2" attributes="0"/>
+                  <Component id="btnCadastroCli" min="-2" pref="158" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="133" max="32767" attributes="0"/>
           </Group>
@@ -43,13 +43,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton5" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="jButton6" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="btnVenda" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="btnRelatorios" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton7" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="btnCadastroProd" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="btnCadastroCli" alignment="3" min="-2" pref="91" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="85" max="32767" attributes="0"/>
           </Group>
@@ -57,25 +57,34 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="btnCadastroCli">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroCliActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="btnVenda">
       <Properties>
         <Property name="text" type="java.lang.String" value="Realizar Venda "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVendaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="btnRelatorios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="btnCadastroProd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar Produto"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastroProdActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

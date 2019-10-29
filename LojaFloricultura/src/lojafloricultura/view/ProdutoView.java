@@ -16,6 +16,8 @@ public class ProdutoView extends javax.swing.JFrame {
      */
     public ProdutoView() {
         initComponents();
+        
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -45,7 +47,7 @@ public class ProdutoView extends javax.swing.JFrame {
         btnEditProduto = new javax.swing.JButton();
         btnDeleteProduto = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
