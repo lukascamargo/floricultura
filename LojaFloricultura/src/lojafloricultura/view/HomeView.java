@@ -47,6 +47,11 @@ public class HomeView extends javax.swing.JFrame {
         });
 
         btnRelatorios.setText("Relatórios");
+        btnRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatoriosActionPerformed(evt);
+            }
+        });
 
         btnCadastroProd.setText("Cadastrar Produto");
         btnCadastroProd.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +107,11 @@ public class HomeView extends javax.swing.JFrame {
         c.setVisible(true);
         
     }//GEN-LAST:event_btnCadastroCliActionPerformed
+
+    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
+       RelatorioView r = new RelatorioView();
+       r.setVisible(true);
+    }//GEN-LAST:event_btnRelatoriosActionPerformed
 
     /**
      * @param args the command line arguments
