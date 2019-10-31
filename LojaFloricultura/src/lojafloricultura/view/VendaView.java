@@ -82,7 +82,7 @@ public class VendaView extends javax.swing.JFrame {
 
         jButton1.setText("Pesquisar");
 
-        jLabel6.setText("Id:");
+        jLabel6.setText("ID:");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
