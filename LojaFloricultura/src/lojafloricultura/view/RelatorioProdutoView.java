@@ -34,7 +34,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
         txtDataInicial = new javax.swing.JFormattedTextField();
         txtDataFinal = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,6 +146,12 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RelatorioProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

@@ -43,7 +43,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,7 +60,7 @@
                       <Component id="pnlCliente" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="83" max="32767" attributes="0"/>
+              <EmptySpace pref="87" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="352" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -90,53 +90,72 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                          <Component id="btnSave" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEndereco" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNomeCliente" min="-2" pref="350" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="txtEndereco" min="-2" pref="191" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblNumero" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txtNumero" min="-2" pref="78" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtCpfCliente" alignment="0" pref="257" max="32767" attributes="0"/>
-                                  <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="txtNomeCliente" max="32767" attributes="0"/>
+                                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtCpfCliente" alignment="0" pref="257" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jFormattedTextField2" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="jComboBox1" alignment="1" pref="87" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jDateChooser2" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtComplemento" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="btnSave" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="chkMasculino" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="chkFeminino" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblComplemento" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtComplemento" min="-2" pref="105" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="264" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,38 +164,58 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCpfCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateChooser2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCpfCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkFeminino" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="chkMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkFeminino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSave" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="btnCancel" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
@@ -187,16 +226,16 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lblNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome:"/>
+            <Property name="text" type="java.lang.String" value="* Nome:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomeCliente">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblCPF">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF:"/>
+            <Property name="text" type="java.lang.String" value="* CPF:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCpfCliente">
@@ -216,23 +255,23 @@
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="lblEmail">
           <Properties>
-            <Property name="text" type="java.lang.String" value="E-mail:"/>
+            <Property name="text" type="java.lang.String" value="* E-mail:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmail">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lblEndereco">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+            <Property name="text" type="java.lang.String" value="* Endere&#xe7;o:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEndereco">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lblNumero">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
+            <Property name="text" type="java.lang.String" value="* N&#xfa;mero:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumero">
@@ -242,7 +281,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtComplemento">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="lblComplemento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Complemento:"/>
           </Properties>
@@ -257,10 +296,50 @@
             <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="lblSexo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sexo:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estado Civil:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Data de nascimento:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" Telefone *"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBox1">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Solteiro"/>
+                <StringItem index="1" value="Casado"/>
+                <StringItem index="2" value="Separado"/>
+                <StringItem index="3" value="Divorciado"/>
+                <StringItem index="4" value="Vi&#xfa;vo"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="(##)#####-####" subtype="-1" type="5"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
         </Component>
       </SubComponents>
     </Container>
@@ -274,8 +353,8 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
-                <Column editable="true" title="Id" type="java.lang.Integer"/>
+              <Table columnCount="11" rowCount="0">
+                <Column editable="true" title="ID" type="java.lang.Integer"/>
                 <Column editable="true" title="Nome" type="java.lang.String"/>
                 <Column editable="true" title="CPF" type="java.lang.String"/>
                 <Column editable="true" title="Email" type="java.lang.String"/>
@@ -283,6 +362,9 @@
                 <Column editable="true" title="N&#xfa;mero" type="java.lang.String"/>
                 <Column editable="true" title="Complemento" type="java.lang.String"/>
                 <Column editable="true" title="Sexo" type="java.lang.String"/>
+                <Column editable="true" title="Estado Civil" type="java.lang.Object"/>
+                <Column editable="true" title="Data de Nascimento" type="java.lang.Object"/>
+                <Column editable="true" title="Telefone" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
