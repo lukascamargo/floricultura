@@ -43,7 +43,7 @@ public class SimulaDBProduto {
         Produto produto = new Produto();
         
         for(int i = 0; i < this.listaProdutos.size(); i++){
-            if(this.listaProdutos.get(i).getId() == i){
+            if(this.listaProdutos.get(i).getId() == id){
                 produto.setNome(this.listaProdutos.get(i).getNome());
                 produto.setDescricao(this.listaProdutos.get(i).getDescricao());
                 produto.setQuantidade(this.listaProdutos.get(i).getQuantidade());
@@ -53,6 +53,22 @@ public class SimulaDBProduto {
         
         return produto;
     }
+    
+    public Produto getProdutoByNome(String nome){
+        Produto produto = new Produto();
+        
+        for(int i = 0; i < this.listaProdutos.size(); i++){
+            if(this.listaProdutos.get(i).getNome() == nome){
+                produto.setNome(this.listaProdutos.get(i).getNome());
+                produto.setDescricao(this.listaProdutos.get(i).getDescricao());
+                produto.setQuantidade(this.listaProdutos.get(i).getQuantidade());
+                produto.setValor(this.listaProdutos.get(i).getValor());
+            }
+        }
+        
+        return produto;
+    }
+    
     
     public boolean AtualizarProduto(Produto p){
         for(Produto item: listaProdutos){

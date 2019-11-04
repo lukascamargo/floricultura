@@ -32,5 +32,9 @@ public class ProdutoDAO {
         return SimulaDBProduto.getIntance().getProdutoById(id);
     }
     
+    public static Produto getProdutoByNome(String nome){
+        return SimulaDBProduto.getIntance().getProdutoByNome(nome);
+    }
+    
     
 }
