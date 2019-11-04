@@ -36,6 +36,32 @@ public class SimulaDBCliente {
         return this.listaClientes;
     }
     
+    public Cliente getClienteByCpf(String cpf){
+        Cliente cliente = new Cliente();
+        
+        for(int i = 0; i < this.listaClientes.size(); i++){
+            if(this.listaClientes.get(i).getCPF() == cpf){
+                cliente.setNome(this.listaClientes.get(i).getNome());
+                cliente.setCPF(this.listaClientes.get(i).getCPF());
+            }
+        }
+        
+        return cliente;
+    }
+    
+    public Cliente getClienteByNome(String nome){
+        Cliente cliente = new Cliente();
+        
+        for(int i = 0; i < this.listaClientes.size(); i++){
+            if(this.listaClientes.get(i).getNome() == nome){
+                cliente.setNome(this.listaClientes.get(i).getNome());
+                cliente.setCPF(this.listaClientes.get(i).getCPF());
+            }
+        }
+        
+        return cliente;
+    }
+    
     public boolean AtualizarCliente(Cliente c){
         for(Cliente item: listaClientes){
             if(item.getId() == c.getId()){

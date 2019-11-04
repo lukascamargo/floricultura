@@ -36,5 +36,4 @@ public class ProdutoDAO {
         return SimulaDBProduto.getIntance().getProdutoByNome(nome);
     }
     
-    
 }
