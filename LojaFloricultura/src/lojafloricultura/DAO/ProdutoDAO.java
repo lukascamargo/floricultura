@@ -27,4 +27,10 @@ public class ProdutoDAO {
     public static ArrayList<Produto> getProdutos(){
         return SimulaDBProduto.getIntance().getProdutos();
     }
+    
+    public static Produto getProdutoById(int id){
+        return SimulaDBProduto.getIntance().getProdutoById(id);
+    }
+    
+    
 }

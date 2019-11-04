@@ -39,6 +39,21 @@ public class SimulaDBProduto {
         return this.listaProdutos;
     }
     
+    public Produto getProdutoById(int id){
+        Produto produto = new Produto();
+        
+        for(int i = 0; i < this.listaProdutos.size(); i++){
+            if(this.listaProdutos.get(i).getId() == i){
+                produto.setNome(this.listaProdutos.get(i).getNome());
+                produto.setDescricao(this.listaProdutos.get(i).getDescricao());
+                produto.setQuantidade(this.listaProdutos.get(i).getQuantidade());
+                produto.setValor(this.listaProdutos.get(i).getValor());
+            }
+        }
+        
+        return produto;
+    }
+    
     public boolean AtualizarProduto(Produto p){
         for(Produto item: listaProdutos){
             if(item.getId() == p.getId()){
