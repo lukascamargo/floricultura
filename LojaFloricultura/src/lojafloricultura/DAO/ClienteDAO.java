@@ -30,4 +30,8 @@ public class ClienteDAO {
         return SimulaDBCliente.getInstance().getClientes();
     }
     
+    public static Cliente getClienteByNome(String nome){
+        return SimulaDBCliente.getInstance().getClienteByNome(nome);
+    }
+    
 }

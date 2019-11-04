@@ -35,6 +35,7 @@ public class RelatorioView extends javax.swing.JFrame {
         txtDataFinal = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblDataInicial1 = new javax.swing.JLabel();
         lblDataFinal1 = new javax.swing.JLabel();
@@ -42,6 +43,7 @@ public class RelatorioView extends javax.swing.JFrame {
         txtDataInicial2 = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduto1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,6 +80,8 @@ public class RelatorioView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProduto);
 
+        jButton1.setText("Pesquisar");
+
         javax.swing.GroupLayout pnlAnaliticoLayout = new javax.swing.GroupLayout(pnlAnalitico);
         pnlAnalitico.setLayout(pnlAnaliticoLayout);
         pnlAnaliticoLayout.setHorizontalGroup(
@@ -97,7 +101,9 @@ public class RelatorioView extends javax.swing.JFrame {
                         .addGroup(pnlAnaliticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDataInicial)
                             .addComponent(txtDataFinal))
-                        .addGap(638, 638, 638))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(547, 547, 547))))
         );
         pnlAnaliticoLayout.setVerticalGroup(
             pnlAnaliticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,8 +115,9 @@ public class RelatorioView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlAnaliticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataFinal)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -153,6 +160,8 @@ public class RelatorioView extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblProduto1);
 
+        jButton2.setText("Pesquisar");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -171,7 +180,9 @@ public class RelatorioView extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDataInicial1)
                             .addComponent(txtDataInicial2))
-                        .addGap(638, 638, 638))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(547, 547, 547))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +194,9 @@ public class RelatorioView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataFinal1)
-                    .addComponent(txtDataInicial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(txtDataInicial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -258,6 +270,8 @@ public class RelatorioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
