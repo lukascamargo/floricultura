@@ -23,14 +23,8 @@ public class ClienteDAO {
     
     public static boolean salvar(Cliente c){
         return DatabaseConnection.executarUpdate("INSERT INTO Clientes (nome, CPF)"
-                    + "'"
-                    + c.getNome()
-                    + "'"
-                    + ","
-                    + "'"
-                    + c.getCPF().replace(".", "").replace("-", "")
-                    + "'"
-                    + ")");
+                    + "'" + c.getNome() + "'" + "," + "'"
+                    + c.getCPF().replace(".", "").replace("-", "") + "'" + ")");
     }
     
     public static boolean atualizar(Cliente c){
@@ -70,11 +64,56 @@ public class ClienteDAO {
         
         } catch (SQLException ex){
             listaClientes = null;
-        } finally {
-            listaClientes = null;
-        }
+        } 
         
         return listaClientes;
     }
     
+    public static Cliente getClienteByCPF(String cCPF) {
+        Cliente c = new Cliente();
+        
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
+                + "WHERE CPF = " + "'" + cCPF + "'");
+        try {
+            while(rs.next()){
+                c.setId(rs.getInt("ID"));
+                c.setNome(rs.getString("NOME"));
+                c.setCPF(rs.getString("CPF"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setSexo(rs.getString("SEXO"));
+                c.setEndereco(rs.getString("ENDERECO"));
+                c.setNumero(rs.getString("NUMERO"));
+                c.setComplemento(rs.getString("COMPLEMENTO"));
+            }
+        
+        } catch (SQLException ex){
+            c = null;
+        } 
+        
+        return c;
+    }
+    
+    public static Cliente getClienteByNome(String cNome) {
+        Cliente c = new Cliente();
+        
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
+                + "WHERE NOME = " + "'" + cNome + "'");
+        try {
+            while(rs.next()){
+                c.setId(rs.getInt("ID"));
+                c.setNome(rs.getString("NOME"));
+                c.setCPF(rs.getString("CPF"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setSexo(rs.getString("SEXO"));
+                c.setEndereco(rs.getString("ENDERECO"));
+                c.setNumero(rs.getString("NUMERO"));
+                c.setComplemento(rs.getString("COMPLEMENTO"));
+            }
+        
+        } catch (SQLException ex){
+            c = null;
+        } 
+        
+        return c;
+    }
 }

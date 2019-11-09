@@ -31,6 +31,10 @@ public class Produto {
     public String getDescricao() {
         return descricao;
     }
+    
+    public void setId(int pId){
+        this.id = pId;
+    }
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
