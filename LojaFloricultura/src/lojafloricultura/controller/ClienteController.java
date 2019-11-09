@@ -7,6 +7,7 @@
 package lojafloricultura.controller;
 
 import java.util.ArrayList;
+import lojafloricultura.DAO.ClienteDAO;
 import lojafloricultura.model.Cliente;
 
 /**
@@ -27,20 +28,19 @@ public class ClienteController {
     }
     
     public ArrayList<String[]> getClientes(){
-        ArrayList<String[]> listaProdutos = new ArrayList<>();
+        ArrayList<String[]> listaClientes = new ArrayList<>();
         
-        return listaProdutos;
+        return listaClientes;
     }
     
     public ArrayList<String[]> getClienteById(){
-        ArrayList<String[]> produtoPesquisado = new ArrayList<>();
+        ArrayList<String[]> clientePesquisado = new ArrayList<>();
         
-        return produtoPesquisado;
+        return clientePesquisado;
     }
     
-    public ArrayList<String[]> getClienteByName(){
-        ArrayList<String[]> produtoPesquisado = new ArrayList<>();
-        
-        return produtoPesquisado;
+    public static Cliente getClienteByNome(String nome){
+        Cliente clientePesquisado = ClienteDAO.getClienteByNome(nome);
+        return clientePesquisado;
     }
 }

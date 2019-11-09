@@ -5,8 +5,12 @@
  */
 package lojafloricultura.view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import lojafloricultura.controller.ClienteController;
 import lojafloricultura.controller.VendaController;
+import lojafloricultura.model.Cliente;
 
 /**
  *
@@ -112,7 +116,7 @@ public class VendaView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtIdCliente = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblCliente = new javax.swing.JTable();
         btnAdicionaCliente = new javax.swing.JButton();
         btnExcluiCliente = new javax.swing.JButton();
         btnCancelaCliente = new javax.swing.JButton();
@@ -123,7 +127,7 @@ public class VendaView extends javax.swing.JFrame {
         txtNomeProduto = new javax.swing.JTextField();
         btnPesquisaProduto = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
         btnAdicionaProduto = new javax.swing.JButton();
         lblQtd = new javax.swing.JLabel();
         txtQtdProduto = new javax.swing.JTextField();
@@ -144,17 +148,22 @@ public class VendaView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Cliente", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jLabel1.setText("Nome:");
 
         jLabel2.setText("CPF:");
 
         btnPesquisaCliente.setText("Pesquisar");
+        btnPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaClienteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("ID:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
             },
@@ -162,11 +171,16 @@ public class VendaView extends javax.swing.JFrame {
                 "Id", "Nome", "CPF"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblCliente);
 
         btnAdicionaCliente.setText("Ok");
 
         btnExcluiCliente.setText("Remover");
+        btnExcluiCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluiClienteActionPerformed(evt);
+            }
+        });
 
         btnCancelaCliente.setText("Cancelar");
         btnCancelaCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +254,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pesquisar Produto", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         lblID.setText("ID:");
 
@@ -248,7 +262,7 @@ public class VendaView extends javax.swing.JFrame {
 
         btnPesquisaProduto.setText("Pesquisar");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -256,7 +270,7 @@ public class VendaView extends javax.swing.JFrame {
                 "Id", "Nome", "Descrição", "Quantidade no Estoquue"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblProdutos);
 
         btnAdicionaProduto.setText("Ok");
 
@@ -332,7 +346,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho de Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho de Compra", 0, 0, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         tblCarrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -522,6 +536,27 @@ public class VendaView extends javax.swing.JFrame {
         LimpaFormularioProduto();
     }//GEN-LAST:event_btnCancelaProdutoActionPerformed
 
+    private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
+
+        Cliente cliente = new Cliente();
+            
+        cliente = ClienteController.getClienteByNome(txtNomeCliente.getText());
+        
+        DefaultTableModel tmClientes = new DefaultTableModel();
+        tmClientes.addColumn("Id");
+        tmClientes.addColumn("Nome");
+        tmClientes.addColumn("CPF");
+        tblCliente.setModel(tmClientes);
+            
+        tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), cliente.getNome(), cliente.getCPF()});
+            
+        DesabilitaFormularioCliente();
+    }//GEN-LAST:event_btnPesquisaClienteActionPerformed
+
+    private void btnExcluiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiClienteActionPerformed
+        
+    }//GEN-LAST:event_btnExcluiClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -581,8 +616,6 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblFormasPag;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNome;
@@ -591,6 +624,8 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JRadioButton rboDebito;
     private javax.swing.JRadioButton rboDinheiro;
     private javax.swing.JTable tblCarrinho;
+    private javax.swing.JTable tblCliente;
+    private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCPFCliente;
     private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtIdProduto;
