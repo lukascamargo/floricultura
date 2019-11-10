@@ -18,13 +18,15 @@ import java.util.ArrayList;
 public class DatabaseConnection {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
-    public static String SENHA = "";
+    public static String SENHA = "root";
     public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     
     public static boolean executarUpdate(String query){
         boolean retorno = false;
         Connection conexao = null;
         Statement instrucaoSQL = null;
+        
+        System.out.println("Executar Update");
         
         try {
             Class.forName(DRIVER);
@@ -33,6 +35,7 @@ public class DatabaseConnection {
             instrucaoSQL = conexao.createStatement();
             
             int linhasAfetadas = instrucaoSQL.executeUpdate(query);
+            System.out.println(linhasAfetadas);
             if(linhasAfetadas > 0){
                 retorno = true;
             } else {
@@ -40,9 +43,11 @@ public class DatabaseConnection {
             }
         } catch (ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
+            System.out.println(ex);
             retorno = false;
         } catch (SQLException ex) {
-            System.out.println("Erro no comando SQL.");
+            System.out.println("Erro no comando SQL: " + ex);
+            System.out.println(ex);
             retorno = false;
         } finally {
             try {
@@ -71,6 +76,8 @@ public class DatabaseConnection {
             instrucaoSQL = conexao.createStatement();
             
             retorno = instrucaoSQL.executeQuery(query);
+            
+            System.out.println(retorno);
         } catch (ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
             retorno = null;

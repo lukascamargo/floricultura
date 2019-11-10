@@ -31,14 +31,16 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnDeleteProduto" min="-2" pref="91" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="pnlProduto" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pnlProduto" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnNewProduto" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" min="-2" pref="819" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,7 +100,7 @@
                           <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtNomeProduto" alignment="0" min="-2" pref="287" max="-2" attributes="0"/>
-                      <Component id="txtQuantidade" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="txtQuantidadeProduto" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="txtValueProduto" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
                   </Group>
@@ -127,7 +129,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtQuantidadeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -156,6 +158,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveProdutoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
@@ -189,7 +194,7 @@
             <Property name="text" type="java.lang.String" value="Quantidade:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtQuantidade">
+        <Component class="javax.swing.JTextField" name="txtQuantidadeProduto">
         </Component>
       </SubComponents>
     </Container>
@@ -205,7 +210,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="TabelaProdutos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="0">

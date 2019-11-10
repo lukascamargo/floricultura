@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class ProdutoDAO {
         
     public static boolean salvar(Produto p){
+        System.out.println(p);
         return DatabaseConnection.executarUpdate("INSER INTO Produtos (nome, quantidade, valor, descricao)"
                 + "'" + p.getNome() + "'" + ","
                 + "'" + p.getQuantidade() + "'" + ","
@@ -49,7 +50,7 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setId(rs.getInt("ID"));
                 p.setQuantidade(rs.getInt("QUANTIDADE"));
-                p.setValor(rs.getFloat("VALOR"));
+                p.setValor(rs.getDouble("VALOR") + 50);
                 p.setNome(rs.getString("NOME"));
                 p.setDescricao(rs.getString("DESCRICAO"));
                 listaProdutos.add(p);
@@ -69,7 +70,7 @@ public class ProdutoDAO {
             while(rs.next()){
                 p.setId(rs.getInt("ID"));
                 p.setQuantidade(rs.getInt("QUANTIDADE"));
-                p.setValor(rs.getFloat("VALOR"));
+                p.setValor(rs.getDouble("VALOR"));
                 p.setNome(rs.getString("NOME"));
                 p.setDescricao(rs.getString("DESCRICAO"));
             }
@@ -88,7 +89,7 @@ public class ProdutoDAO {
             while(rs.next()){
                 p.setId(rs.getInt("ID"));
                 p.setQuantidade(rs.getInt("QUANTIDADE"));
-                p.setValor(rs.getFloat("VALOR"));
+                p.setValor(rs.getDouble("VALOR"));
                 p.setNome(rs.getString("NOME"));
                 p.setDescricao(rs.getString("DESCRICAO"));
             }

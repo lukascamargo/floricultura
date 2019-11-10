@@ -5,20 +5,47 @@
  */
 package lojafloricultura.view;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import lojafloricultura.controller.ProdutoController;
+
 /**
  *
  * @author Família
  */
 public class ProdutoView extends javax.swing.JFrame {
+    ProdutoController produtoController = new ProdutoController();
+    private int ideditar;
 
     /**
      * Creates new form ProdutoView
      */
     public ProdutoView() {
         initComponents();
-        
+        Recarregar();
         setExtendedState(MAXIMIZED_BOTH);
     }
+    
+    public void Recarregar(){
+        ArrayList<String[]> linhasProdutos = produtoController.getProdutos();
+        
+        System.out.println(linhasProdutos);
+        
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("ID");
+        tmProdutos.addColumn("Nome");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Valor");
+        tmProdutos.addColumn("Descricao");
+        TabelaProdutos.setModel(tmProdutos);
+        
+        for(String[] p:linhasProdutos){
+            tmProdutos.addRow(p);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,10 +67,10 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtValueProduto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtQuantidade = new javax.swing.JTextField();
+        txtQuantidadeProduto = new javax.swing.JTextField();
         btnNewProduto = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaProdutos = new javax.swing.JTable();
         btnEditProduto = new javax.swing.JButton();
         btnDeleteProduto = new javax.swing.JButton();
 
@@ -56,6 +83,11 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel2.setText("Descrição:");
 
         btnSaveProduto.setText("Salvar");
+        btnSaveProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveProdutoActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancelar");
 
@@ -85,7 +117,7 @@ public class ProdutoView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancel))
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(280, Short.MAX_VALUE))
@@ -108,7 +140,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(pnlProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +150,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
         btnNewProduto.setText("Novo");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -134,7 +166,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(TabelaProdutos);
 
         btnEditProduto.setText("Editar");
 
@@ -152,11 +184,12 @@ public class ProdutoView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDeleteProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNewProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(btnNewProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,6 +213,31 @@ public class ProdutoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSaveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProdutoActionPerformed
+        // TODO add your handling code here:
+        if(
+            produtoController.salvar(
+                txtNomeProduto.getText(),
+                Integer.parseInt(txtQuantidadeProduto.getText()),
+                Double.parseDouble(txtValueProduto.getText()),
+                txtDescriptionProduto.getText()
+            )
+        ){
+            this.Recarregar();
+            JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
+            LimpaForm();
+        } else {
+            JOptionPane.showMessageDialog(null, "Falha ao cadastrar Produto!");
+        }
+    }//GEN-LAST:event_btnSaveProdutoActionPerformed
+
+    private void LimpaForm(){
+        txtNomeProduto.setText("");
+        txtQuantidadeProduto.setText("");
+        txtValueProduto.setText("");
+        txtDescriptionProduto.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -216,6 +274,7 @@ public class ProdutoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaProdutos;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDeleteProduto;
     private javax.swing.JButton btnEditProduto;
@@ -227,11 +286,10 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlProduto;
     private javax.swing.JTextArea txtDescriptionProduto;
     private javax.swing.JTextField txtNomeProduto;
-    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtQuantidadeProduto;
     private javax.swing.JTextField txtValueProduto;
     // End of variables declaration//GEN-END:variables
 }

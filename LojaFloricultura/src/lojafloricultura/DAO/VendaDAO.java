@@ -4,72 +4,78 @@
  * and open the template in the editor.
  */
 package lojafloricultura.DAO;
+
 import lojafloricultura.model.Venda;
+import lojafloricultura.model.Cliente;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
  * @author lukas.camargo
  */
 public class VendaDAO {
-    
-    private static VendaDAO mockdb;
-    private ArrayList<Venda> listaVendas;
-    
-    private VendaDAO(){
-        listaVendas = new ArrayList<Venda>();
-    }
-    
-    public static synchronized VendaDAO getInstance(){
-        if(mockdb == null)
-               mockdb = new VendaDAO();
+    Cliente Cliente = null;
         
-        return mockdb;
+    public static boolean salvar(Venda v){
+        return DatabaseConnection.executarUpdate("");
     }
     
-    public Venda SalvarVenda(Venda v){
-        int index = listaVendas.size() - 1;
-        if(index == -1){
-            v.setCodigo(1);
-        } else {
-            v.setCodigo(listaVendas.get(index).getCodigo() + 1);
-        }
+    
+    public static boolean atualizar(Venda v){
+        return DatabaseConnection.executarUpdate("");
+    }
+    
+    public static ArrayList<Venda> getVendas() {
+        ArrayList<Venda> listaVendas = new ArrayList<>();
         
-        listaVendas.add(v);
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Vendas");
         
-        return v;
-    }
-    
-    public ArrayList<Venda> getVendas(){
-        return this.listaVendas;
-    }
-    
-    public boolean AtualizarVenda(Venda v){
-        for(Venda item: listaVendas){
-            if(item.getCodigo() == v.getCodigo()){
-                item.setCliente(v.getCliente());
-                item.setProdutos(v.getProdutos());
-                item.setDataAtualizacao(v.getDataAtualizacao());
-                item.setValorTotal(v.getValorTotal());
+        try {
+            while(rs.next()){
+                Venda v = new Venda();
+                
+                v.setCodigo(rs.getInt("ID"));
+                v.setValorTotal(rs.getDouble("VALORTOTAL"));
+                v.setDataAtualizacao(rs.getDate("DATAATUALIZACAO"));
+                v.setDataDaCompra(rs.getDate("DATADACOMPRA"));
+                
+                listaVendas.add(v);
+                
             }
-            
+        } catch (SQLException ex){
+            listaVendas = null;
         }
         
-        return true;
+        return listaVendas;
     }
     
-    public Venda getVenda(int codigo){
+    public static Venda getVenda(int codigo) {
         Venda v = new Venda();
         
-        for(Venda item: listaVendas){
-            if(item.getCodigo() == v.getCodigo()){
-                v = item;
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Vendas"
+                + " WHERE ID = " + codigo);
+        
+        try {
+            while(rs.next()){
+                
+                
+                v.setCodigo(rs.getInt("ID"));
+                v.setValorTotal(rs.getDouble("VALORTOTAL"));
+                v.setDataAtualizacao(rs.getDate("DATAATUALIZACAO"));
+                v.setDataDaCompra(rs.getDate("DATADACOMPRA"));
+                                
             }
+        } catch (SQLException ex){
+            v = null;
         }
         
         return v;
     }
-    
-    
+        
 }
