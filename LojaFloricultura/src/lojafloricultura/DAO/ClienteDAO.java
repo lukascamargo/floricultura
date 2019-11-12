@@ -124,4 +124,31 @@ public class ClienteDAO {
         
         return c;
     }
+    
+    public static Cliente getClienteById(int cId) {
+        Cliente c = new Cliente();
+        
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
+                + "WHERE ID = " + "'" + cId + "'");
+        try {
+            while(rs.next()){
+                c.setId(rs.getInt("ID"));
+                c.setNome(rs.getString("NOME"));
+                c.setCPF(rs.getString("CPF"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setSexo(rs.getString("SEXO"));
+                c.setEndereco(rs.getString("ENDERECO"));
+                c.setNumero(rs.getString("NUMERO"));
+                c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEstadoCivil(rs.getString("estadoCivil"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setTelefone(rs.getString("telefone"));
+            }
+        
+        } catch (SQLException ex){
+            c = null;
+        } 
+        
+        return c;
+    }
 }

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import lojafloricultura.controller.ClienteController;
+import lojafloricultura.model.Cliente;
 
 /**
  *
@@ -28,10 +29,64 @@ public class ClienteView extends javax.swing.JFrame {
         lblID.setVisible(false);
     }
     
+    //Método auxiliar para desabilitar formulario Produto
+    public void DesabilitaFormulario()
+    {
+        txtNomeCliente.setEditable(false);
+        txtCpfCliente.setEditable(false);
+        txtEmail.setEditable(false);
+        txtEndereco.setEditable(false);
+        txtNumero.setEditable(false);
+        txtComplemento.setEditable(false);
+        rboMasculino.setSelected(false);
+        rboFeminino.setSelected(false);
+        cboEstadoCivil.setEditable(false);
+        txtDataNasc.setEditable(false);
+        txtTelefone.setEditable(false);
+        
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
+    }
+    
+    //Método auxiliar para habilitar formulario Cliente
+    public void HabilitaFormulario()
+    {
+        txtNomeCliente.setEditable(true);
+        txtCpfCliente.setEditable(true);
+        txtEmail.setEditable(true);
+        txtEndereco.setEditable(true);
+        txtNumero.setEditable(true);
+        txtComplemento.setEditable(true);
+        rboMasculino.setSelected(true);
+        rboFeminino.setSelected(true);
+        cboEstadoCivil.setEditable(true);
+        txtDataNasc.setEditable(true);
+        txtTelefone.setEditable(true);
+        
+        btnSave.setEnabled(true);
+        btnCancel.setEnabled(true);
+    }
+    
+    //Método auxiliar para limpar formulario
+    public void LimpaFormulario()
+    {
+        txtNomeCliente.setText("");
+        txtCpfCliente.setText("");
+        txtEmail.setText("");
+        txtEndereco.setText("");
+        txtNumero.setText("");
+        txtComplemento.setText("");
+//        rboMasculino.setSelected(true);
+//        rboFeminino.setSelected(true);
+//        cboEstadoCivil.setEditable(true);
+        txtDataNasc.setText("");
+        txtTelefone.setText("");
+    }
+    
     public void LoadTable(){
         
      
-        String[] comprador = ClienteController.getClienteByCPF(txtCpfCliente.getText());
+        Cliente cliente = ClienteController.getClienteByCPF(txtCpfCliente.getText());
         
         
         DefaultTableModel tmClientes = new DefaultTableModel();
@@ -53,7 +108,12 @@ public class ClienteView extends javax.swing.JFrame {
         
       
        
-            tmClientes.addRow(comprador);
+        tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), 
+                                    cliente.getNome(), cliente.getCPF(), 
+                                    cliente.getEmail(), cliente.getEndereco(), 
+                                    cliente.getNumero(), cliente.getComplemento(), 
+                                    cliente.getSexo(), cliente.getEstadoCivil(),
+                                    cliente.getDataNasc(), cliente.getTelefone()});
         
         
        
@@ -101,7 +161,6 @@ public class ClienteView extends javax.swing.JFrame {
         btnNewCliente = new javax.swing.JButton();
         btnEditCliente = new javax.swing.JButton();
         btnDeleteCliente = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -131,6 +190,11 @@ public class ClienteView extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         lblEmail.setText("E-mail ");
 
@@ -312,6 +376,11 @@ public class ClienteView extends javax.swing.JFrame {
         }
 
         btnNewCliente.setText("Novo");
+        btnNewCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewClienteActionPerformed(evt);
+            }
+        });
 
         btnEditCliente.setText("Editar");
 
@@ -321,8 +390,6 @@ public class ClienteView extends javax.swing.JFrame {
                 btnDeleteClienteActionPerformed(evt);
             }
         });
-
-        btnEditar.setText("Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,9 +409,7 @@ public class ClienteView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnNewCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -353,9 +418,7 @@ public class ClienteView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -380,27 +443,34 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(ClienteController.salvar(txtNomeCliente.getText(), txtCpfCliente.getText(), txtEmail.getText(),
-                txtEndereco.getText(), txtNumero.getText(), txtComplemento.getText(),btgSexo.getSelection().getActionCommand(), cboEstadoCivil.getSelectedItem().toString(),
-                txtDataNasc.getText(), txtTelefone.getText()))
-                {
+        if(ClienteController.salvar(txtNomeCliente.getText(), txtCpfCliente.getText(), 
+                txtEmail.getText(), txtEndereco.getText(), txtNumero.getText(), 
+                txtComplemento.getText(),btgSexo.getSelection().getActionCommand(), 
+                cboEstadoCivil.getSelectedItem().toString(), txtDataNasc.getText(),
+                txtTelefone.getText()))
+        {
                     
-                    this.LoadTable();
+            this.LoadTable();
                     
-                    JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso");
-                    //LimparFormulario();
-                }else{
-                    JOptionPane.showMessageDialog(null,"Falha ao cadastrar cliente");
-                }
-
-            
-
-            
+            JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso");
+            LimpaFormulario();
+        }else{
+            JOptionPane.showMessageDialog(null,"Falha ao cadastrar cliente");
+        }
+        DesabilitaFormulario();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeClienteActionPerformed
+
+    private void btnNewClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewClienteActionPerformed
+        HabilitaFormulario();
+    }//GEN-LAST:event_btnNewClienteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        DesabilitaFormulario();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,7 +512,6 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDeleteCliente;
     private javax.swing.JButton btnEditCliente;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNewCliente;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cboEstadoCivil;

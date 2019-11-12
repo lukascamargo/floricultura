@@ -45,23 +45,18 @@ public class ClienteController {
         return listaClientes;
     }
     
-    public static String[] getClienteByCPF(String CPF){
+    public static Cliente getClienteByCPF(String CPF){
         Cliente cliente = ClienteDAO.getClienteByCPF(CPF);
-        String[] clientePesquisado = null;
-        
-        clientePesquisado = new String[]{cliente.getNome(),cliente.getCPF(),
-        cliente.getEmail(), cliente.getEndereco(),cliente.getNumero(),
-        cliente.getComplemento(),cliente.getSexo(),cliente.getEstadoCivil(),
-        cliente.getDataNasc(),cliente.getTelefone()}
-        ;
-        
-        
-        
-        return clientePesquisado;
+        return cliente;
     }
     
     public static Cliente getClienteByNome(String nome){
-        Cliente clientePesquisado = ClienteDAO.getClienteByNome(nome);
-        return clientePesquisado;
+        Cliente cliente = ClienteDAO.getClienteByNome(nome);
+        return cliente;
+    }
+    
+    public static Cliente getClienteById(int id){
+        Cliente cliente = ClienteDAO.getClienteById(id);
+        return cliente;
     }
 }
