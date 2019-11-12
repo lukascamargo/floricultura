@@ -31,7 +31,10 @@ public class ClienteDAO {
                 + "SEXO = " + "'" + c.getSexo() + "'" + ","
                 + "ENDERECO = " + "'" +c.getEndereco() + "'" + ","
                 + "NUMERO = " + "'" +c.getNumero() + "'" + ","
-                + "COMPLEMENTO = " + "'" +c.getComplemento() + "'"
+                + "COMPLEMENTO = " + "'" +c.getComplemento() + "'" + ","
+                + "ESTADOCIVIL = " + "'" +c.getEstadoCivil() + "'" + ","
+                + "DATANASC = " + "'" +c.getDataNasc() + "'" +","
+                + "TELEFONE = " + "'" + c.getTelefone() + "'"
                 + "WHERE ID = " + c.getId());
     }
     
@@ -55,6 +58,9 @@ public class ClienteDAO {
                 c.setEndereco(rs.getString("ENDERECO"));
                 c.setNumero(rs.getString("NUMERO"));
                 c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEstadoCivil(rs.getString("estadoCivil"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setTelefone(rs.getString("telefone"));
                 listaClientes.add(c);
             }
         
@@ -69,7 +75,7 @@ public class ClienteDAO {
         Cliente c = new Cliente();
         
         ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
-                + "WHERE CPF = " + "'" + cCPF + "'");
+                + " WHERE CPF = " + "'" + cCPF + "'");
         try {
             while(rs.next()){
                 c.setId(rs.getInt("ID"));
@@ -80,6 +86,9 @@ public class ClienteDAO {
                 c.setEndereco(rs.getString("ENDERECO"));
                 c.setNumero(rs.getString("NUMERO"));
                 c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEstadoCivil(rs.getString("estadoCivil"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setTelefone(rs.getString("telefone"));
             }
         
         } catch (SQLException ex){
@@ -104,6 +113,9 @@ public class ClienteDAO {
                 c.setEndereco(rs.getString("ENDERECO"));
                 c.setNumero(rs.getString("NUMERO"));
                 c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEstadoCivil(rs.getString("estadoCivil"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setTelefone(rs.getString("telefone"));
             }
         
         } catch (SQLException ex){

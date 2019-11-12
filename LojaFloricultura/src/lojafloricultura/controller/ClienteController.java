@@ -15,16 +15,28 @@ import lojafloricultura.model.Cliente;
  * @author ifreitas
  */
 public class ClienteController {
-    public boolean salvar(){
-        return true;
+    public static boolean salvar(String pNome, String pCPF, String pEmail,
+            String pEndereco,String pNumero, String pComplemento, String pSexo,
+            String pEstadoCivil, String pDataNasc, String pTelefone){
+        
+        Cliente c = new Cliente(pNome, pCPF, pEmail, pEndereco, pNumero,
+        pComplemento, pSexo, pEstadoCivil, pDataNasc, pTelefone);
+        return ClienteDAO.salvar(c);
     }
     
-    public boolean atualizar(){
-        return true;
+    public static boolean atualizar(int ID, String pNome, String pCPF, String pEmail,
+            String pEndereco,String pNumero, String pComplemento, String pSexo,
+            String pEstadoCivil, String pDataNasc, String pTelefone){
+        
+        Cliente c = new Cliente(ID, pNome, pCPF, pEmail, pEndereco, pNumero,
+        pComplemento, pSexo, pEstadoCivil, pDataNasc, pTelefone);
+        return ClienteDAO.atualizar(c);
+        
     }
     
-    public boolean excluir(){
-        return true;
+    public static boolean excluir(int ID){
+        
+        return ClienteDAO.excluir(ID);
     }
     
     public ArrayList<String[]> getClientes(){
@@ -33,8 +45,17 @@ public class ClienteController {
         return listaClientes;
     }
     
-    public ArrayList<String[]> getClienteById(){
-        ArrayList<String[]> clientePesquisado = new ArrayList<>();
+    public static String[] getClienteByCPF(String CPF){
+        Cliente cliente = ClienteDAO.getClienteByCPF(CPF);
+        String[] clientePesquisado = null;
+        
+        clientePesquisado = new String[]{cliente.getNome(),cliente.getCPF(),
+        cliente.getEmail(), cliente.getEndereco(),cliente.getNumero(),
+        cliente.getComplemento(),cliente.getSexo(),cliente.getEstadoCivil(),
+        cliente.getDataNasc(),cliente.getTelefone()}
+        ;
+        
+        
         
         return clientePesquisado;
     }

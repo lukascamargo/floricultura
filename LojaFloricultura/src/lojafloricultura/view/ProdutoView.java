@@ -80,6 +80,12 @@ public class ProdutoView extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
+        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeProdutoActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Descrição:");
 
         btnSaveProduto.setText("Salvar");
@@ -230,6 +236,10 @@ public class ProdutoView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar Produto!");
         }
     }//GEN-LAST:event_btnSaveProdutoActionPerformed
+
+    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
     private void LimpaForm(){
         txtNomeProduto.setText("");

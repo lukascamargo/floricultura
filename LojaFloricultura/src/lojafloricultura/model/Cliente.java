@@ -15,6 +15,33 @@ public class Cliente {
     private String numero;
     private String complemento;
     private String sexo;
+    private String estadoCivil;
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    private String dataNasc;
+    private String telefone;
 
     public Cliente(){
         //TODO: ao criar a conexão retirar incremento do código.
@@ -23,14 +50,34 @@ public class Cliente {
     } 
     
     //construtor
-    public Cliente(int id, String nome, String CPF, String endereco, String numero, String complemento, String sexo) {
-        this.id = id;
+    public Cliente(String nome, String CPF, String email, String endereco, String numero, String complemento, String sexo,
+            String estadoCivil, String dataNasc, String telefone) {
+        
         this.nome = nome;
         this.CPF = CPF;
+        this.email = email;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
         this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.dataNasc = dataNasc;
+        this.telefone = telefone;
+        
+    }
+
+    public Cliente(int id, String nome, String CPF, String email, String endereco, String numero, String complemento, String sexo, String estadoCivil, String dataNasc, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.CPF = CPF;
+        this.email = email;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.dataNasc = dataNasc;
+        this.telefone = telefone;
     }
     
     /*

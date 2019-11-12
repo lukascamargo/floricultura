@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class VendaController {
     
-    VendaDAO vendaDAO = VendaDAO.getInstance();
+    /*VendaDAO vendaDAO = VendaDAO.getInstance();
     
     public Venda salvar(Cliente c, ArrayList<Produto> p){
         Venda v = new Venda(c, p);
@@ -65,6 +65,6 @@ public class VendaController {
             String.valueOf(venda.getDataDaCompra()),
             String.valueOf(venda.getDataAtualizacao())
         };
-    }
+    }*/
     
 }
