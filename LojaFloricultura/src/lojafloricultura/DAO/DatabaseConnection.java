@@ -18,13 +18,12 @@ import java.util.ArrayList;
 public class DatabaseConnection {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
-    public static String SENHA = "";
-    public static String URL = "jdbc:mysql://localhost:3307/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    public static String SENHA = "root";
+    public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    private static Connection conexao = null;
     
     public static boolean executarUpdate(String query){
         boolean retorno = false;
-        Connection conexao = null;
-        Statement instrucaoSQL = null;
         
         System.out.println("Executar Update");
         
@@ -32,9 +31,9 @@ public class DatabaseConnection {
             Class.forName(DRIVER);
             
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-            instrucaoSQL = conexao.createStatement();
+            Statement comando = conexao.createStatement();
             
-            int linhasAfetadas = instrucaoSQL.executeUpdate(query);
+            int linhasAfetadas = comando.executeUpdate(query);
             System.out.println(linhasAfetadas);
             if(linhasAfetadas > 0){
                 retorno = true;
@@ -51,8 +50,6 @@ public class DatabaseConnection {
             retorno = false;
         } finally {
             try {
-                if(instrucaoSQL != null)
-                    instrucaoSQL.close();
                 if(conexao != null)
                     conexao.close();    
             } catch (SQLException ex){
@@ -65,37 +62,47 @@ public class DatabaseConnection {
     }
 
     public static ResultSet executarQuery(String query){
-        ResultSet retorno = null;
-        Connection conexao = null;
-        Statement instrucaoSQL = null;
+        System.out.println("Executar Query");
+        ResultSet retorno = null;  
         
         try {
+            System.out.println("Executar Query 2");
             Class.forName(DRIVER);
             
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
-            instrucaoSQL = conexao.createStatement();
+            Statement comando = conexao.createStatement();
             
-            retorno = instrucaoSQL.executeQuery(query);
+            //ResultSet rs = comando.executeQuery(query);
+            boolean resultado = comando.execute(query);
             
+            retorno = comando.getResultSet();
+            
+            System.out.print("Retorno: ");
             System.out.println(retorno);
         } catch (ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
             retorno = null;
         } catch (SQLException ex) {
+            System.out.println(ex);
             System.out.println("Erro no comando SQL.");
             retorno = null;
         } finally {
-            try {
-                if(instrucaoSQL != null)
-                    instrucaoSQL.close();
-                if(conexao != null)
-                    conexao.close();    
-            } catch (SQLException ex){
-                
-            }
+            DatabaseConnection.closeConnection();
         }
         
         return retorno;
+    }
+    
+    
+    private static void closeConnection() {
+        try {
+             if(conexao != null){
+               conexao.close();
+               conexao = null;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
 }

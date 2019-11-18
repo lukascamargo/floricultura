@@ -9,6 +9,7 @@ package lojafloricultura.controller;
 
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import lojafloricultura.model.Produto;
 import lojafloricultura.DAO.ProdutoDAO;
@@ -25,8 +26,10 @@ public class ProdutoController {
         return ProdutoDAO.salvar(p);
     }
     
-    public boolean atualizar(){
-        return true;
+    public boolean atualizar(int id, String pNome, int pQuantidade, double pValor, String pDescricao){
+        Produto p = new Produto(pNome, pQuantidade, pValor, pDescricao);
+        System.out.println(p);
+        return ProdutoDAO.salvar(p);
     }
     
     public boolean excluir(){
@@ -35,6 +38,7 @@ public class ProdutoController {
     
     public ArrayList<String[]> getProdutos(){
         ArrayList<Produto> Produtos = ProdutoDAO.getProdutos();
+        System.out.println(Produtos);
         ArrayList<String[]> listaProdutos = new ArrayList<>();
         
         for(int i = 0; i < Produtos.size(); i++){
@@ -56,8 +60,19 @@ public class ProdutoController {
         return produtoPesquisado;
     }
     
-    public ArrayList<String[]> getProdutoByName(){
+    public ArrayList<String[]> getProdutoByName(String nome) throws SQLException, ClassNotFoundException{
+        ArrayList<Produto> Produtos = ProdutoDAO.getProdutoByNome(nome);
         ArrayList<String[]> produtoPesquisado = new ArrayList<>();
+        
+        for(int i = 0; i < Produtos.size(); i++){
+            produtoPesquisado.add(new String[]{
+               String.valueOf(Produtos.get(i).getId()),
+               Produtos.get(i).getNome(),
+               String.valueOf(Produtos.get(i).getQuantidade()),
+               String.valueOf(Produtos.get(i).getValor()),
+               Produtos.get(i).getDescricao()
+            });
+        }
         
         return produtoPesquisado;
     }

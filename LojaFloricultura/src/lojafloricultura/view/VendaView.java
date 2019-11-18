@@ -143,6 +143,8 @@ public class VendaView extends javax.swing.JFrame {
         rboDebito = new javax.swing.JRadioButton();
         rboCredito = new javax.swing.JRadioButton();
         lblFormasPag = new javax.swing.JLabel();
+        rboCredito1 = new javax.swing.JRadioButton();
+        lblFormasPag1 = new javax.swing.JLabel();
         btnAdicionarCliente = new javax.swing.JButton();
         btnAdicionarProduto = new javax.swing.JButton();
 
@@ -392,6 +394,16 @@ public class VendaView extends javax.swing.JFrame {
         lblFormasPag.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFormasPag.setText("Formas de Pagamento:");
 
+        rboCredito1.setText("Desconto");
+        rboCredito1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rboCredito1ActionPerformed(evt);
+            }
+        });
+
+        lblFormasPag1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFormasPag1.setText("Outros Itens:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -408,6 +420,10 @@ public class VendaView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFormasPag1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rboCredito1)
+                .addGap(42, 42, 42)
                 .addComponent(lblFormasPag)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +441,9 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFormasPag)
-                            .addComponent(rboDinheiro))
+                            .addComponent(rboDinheiro)
+                            .addComponent(rboCredito1)
+                            .addComponent(lblFormasPag1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rboDebito)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -581,6 +599,10 @@ public class VendaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIdClienteKeyReleased
 
+    private void rboCredito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rboCredito1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rboCredito1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -641,10 +663,12 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblFormasPag;
+    private javax.swing.JLabel lblFormasPag1;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblQtd;
     private javax.swing.JRadioButton rboCredito;
+    private javax.swing.JRadioButton rboCredito1;
     private javax.swing.JRadioButton rboDebito;
     private javax.swing.JRadioButton rboDinheiro;
     private javax.swing.JTable tblCarrinho;
