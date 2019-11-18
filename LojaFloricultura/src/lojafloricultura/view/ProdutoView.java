@@ -20,6 +20,7 @@ import lojafloricultura.controller.ProdutoController;
 public class ProdutoView extends javax.swing.JFrame {
     ProdutoController produtoController = new ProdutoController();
     private int ideditar;
+    private boolean editar;
 
     /**
      * Creates new form ProdutoView
@@ -46,7 +47,21 @@ public class ProdutoView extends javax.swing.JFrame {
         for(String[] p:linhasProdutos){
             tmProdutos.addRow(p);
         }
+        
+        LimpaForm();
+        FuncaoFormulario(false);
+        
+        
     }
+    
+    public void FuncaoFormulario(boolean opcao){
+        txtNomeProduto.setEnabled(opcao);
+        txtDescriptionProduto.setEnabled(opcao);
+        txtQuantidadeProduto.setEnabled(opcao);
+        txtValueProduto.setEnabled(opcao);
+        btnSaveProduto.setVisible(opcao);
+    }
+   
     
     
 
@@ -103,6 +118,11 @@ public class ProdutoView extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         txtDescriptionProduto.setColumns(20);
         txtDescriptionProduto.setRows(5);
@@ -162,6 +182,11 @@ public class ProdutoView extends javax.swing.JFrame {
         );
 
         btnNewProduto.setText("Novo");
+        btnNewProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewProdutoActionPerformed(evt);
+            }
+        });
 
         TabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,6 +214,11 @@ public class ProdutoView extends javax.swing.JFrame {
         });
 
         btnDeleteProduto.setText("Excluir");
+        btnDeleteProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteProdutoActionPerformed(evt);
+            }
+        });
 
         pnlCliente1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -279,20 +309,41 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void btnSaveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProdutoActionPerformed
         // TODO add your handling code here:
-        if(
-            produtoController.salvar(
-                txtNomeProduto.getText(),
-                Integer.parseInt(txtQuantidadeProduto.getText()),
-                Double.parseDouble(txtValueProduto.getText()),
-                txtDescriptionProduto.getText()
-            )
-        ){
-            this.Recarregar();
-            JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
-            LimpaForm();
+        if(editar && ValidarFormulario()){
+            if(
+                    produtoController.atualizar(
+                            ideditar,
+                            txtNomeProduto.getText(),
+                            Integer.parseInt(txtQuantidadeProduto.getText()),
+                            Double.parseDouble(txtValueProduto.getText()),
+                            txtDescriptionProduto.getText()
+                    )
+                    ){
+                this.Recarregar();
+                JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso!");
+                LimpaForm();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao ediar o Produto!");
+            }            
+        } else if(!editar && ValidarFormulario()) {
+            if(
+                    produtoController.salvar(
+                            txtNomeProduto.getText(),
+                            Integer.parseInt(txtQuantidadeProduto.getText()),
+                            Double.parseDouble(txtValueProduto.getText()),
+                            txtDescriptionProduto.getText()
+                    )
+                    ){
+                this.Recarregar();
+                JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
+                LimpaForm();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao cadastrar Produto!");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Falha ao cadastrar Produto!");
+            JOptionPane.showMessageDialog(null, "Falha na operação de Produto!");
         }
+        
     }//GEN-LAST:event_btnSaveProdutoActionPerformed
 
     private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
@@ -333,19 +384,109 @@ public class ProdutoView extends javax.swing.JFrame {
         if(TabelaProdutos.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Selecione um item para editar!");
         } else {
+            editar = true;
             ideditar = Integer.parseInt((String) TabelaProdutos.getValueAt(TabelaProdutos.getSelectedRow(), 0));
             txtNomeProduto.setText((String) TabelaProdutos.getValueAt(TabelaProdutos.getSelectedRow(), 1));
             txtQuantidadeProduto.setText((String) TabelaProdutos.getValueAt(TabelaProdutos.getSelectedRow(), 2));
             txtValueProduto.setText((String) TabelaProdutos.getValueAt(TabelaProdutos.getSelectedRow(), 3));
             txtDescriptionProduto.setText((String) TabelaProdutos.getValueAt(TabelaProdutos.getSelectedRow(), 4));
+            FuncaoFormulario(true);
         }
     }//GEN-LAST:event_btnEditProdutoActionPerformed
+
+    private void btnNewProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProdutoActionPerformed
+        // TODO add your handling code here:
+        editar = false;
+        btnSaveProduto.setVisible(true);
+        FuncaoFormulario(true);
+        
+        //habilitar o formulário
+    }//GEN-LAST:event_btnNewProdutoActionPerformed
+
+    private void btnDeleteProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProdutoActionPerformed
+        // TODO add your handling code here:
+        if(TabelaProdutos.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione um produto para deletar");
+        } else {
+            int selectedRowIndex = TabelaProdutos.getSelectedRow();
+            if(produtoController.excluir(Integer.parseInt((String) TabelaProdutos.getValueAt(selectedRowIndex, 0)))) {
+                JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir o produto");
+            }
+            Recarregar();
+        }
+    }//GEN-LAST:event_btnDeleteProdutoActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        Recarregar();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     private void LimpaForm(){
         txtNomeProduto.setText("");
         txtQuantidadeProduto.setText("");
         txtValueProduto.setText("");
         txtDescriptionProduto.setText("");
+    }
+    
+    private boolean ValidarFormulario() {
+        
+        if(this.txtNomeProduto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this,"Defina um Nome para o Produto!");
+            return false;
+        }
+        
+        if(this.txtDescriptionProduto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this,"Defina uma descrição para o Produto!");
+            return false;
+        }
+        
+        //Trata quantidade
+        try {
+
+            int valorConvertido = Integer.parseInt(this.txtQuantidadeProduto.getText());
+            System.out.println(valorConvertido);
+            if(valorConvertido < 0){
+                JOptionPane.showMessageDialog(this,"Quantidade deve ser um numero maior que zero!!");
+                return false;
+            }
+        
+        } catch(NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this,"Quantidade deve ser um numero inteiro!!");
+            return false;
+        
+        }catch(IllegalArgumentException e){
+            
+            JOptionPane.showMessageDialog(this,"Digite um valor para Quantidade");  
+            return false;
+        
+        }
+        //Trata Valor
+        try {
+
+            double valorConvertido = Double.parseDouble(this.txtValueProduto.getText());
+            if(valorConvertido < 0){
+                JOptionPane.showMessageDialog(this,"Valor deve ser um numero maior que zero!!");
+                return false;
+            }
+        
+        } catch(NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this,"Valor deve ser um numero");
+            return false;
+        
+        } catch(IllegalArgumentException e){
+            
+            JOptionPane.showMessageDialog(this,"Digite um valor!");  
+            return false;
+        
+        }
+        
+        
+        return true;
+        
     }
     
     /**

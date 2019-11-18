@@ -14,12 +14,21 @@ public class Produto {
     
     public Produto(){}
     
-    public Produto(String nome, int quantidade, double valor, String descricao){
+    public Produto(int id, String nome, int quantidade, double valor, String descricao){
+        this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
         this.valor = valor;
         this.descricao = descricao;
     }
+    
+    public Produto(String nome, int quantidade, double valor, String descricao){
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.valor = valor;
+        this.descricao = descricao;
+    }   
+    
 
     public int getId() {
         return id;

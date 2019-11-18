@@ -27,13 +27,13 @@ public class ProdutoController {
     }
     
     public boolean atualizar(int id, String pNome, int pQuantidade, double pValor, String pDescricao){
-        Produto p = new Produto(pNome, pQuantidade, pValor, pDescricao);
+        Produto p = new Produto(id, pNome, pQuantidade, pValor, pDescricao);
         System.out.println(p);
-        return ProdutoDAO.salvar(p);
+        return ProdutoDAO.atualizar(p);
     }
     
-    public boolean excluir(){
-        return true;
+    public boolean excluir(int id){
+        return ProdutoDAO.excluir(id);
     }
     
     public ArrayList<String[]> getProdutos(){

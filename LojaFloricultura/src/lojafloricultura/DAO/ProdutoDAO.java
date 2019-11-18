@@ -75,12 +75,12 @@ public class ProdutoDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
             
-            int linhasAfetadas = comando.executeUpdate("UPDATE produtos SET("
+            int linhasAfetadas = comando.executeUpdate("UPDATE produtos SET "
                 + "nome = " + "'" + p.getNome() + "'" + ","
-                + "quantidade = " + "'" + p.getDescricao() + "'" + ","
+                + "descricao = " + "'" + p.getDescricao() + "'" + ","
                 + "valor = " +  p.getValor() + ","
-                + "descricao = " + p.getQuantidade() + ")"
-                + "WHERE id = " + p.getId());
+                + "quantidade = " + p.getQuantidade()
+                + " WHERE id = " + p.getId());
             
             if(linhasAfetadas > 0){
                 retorno = true;
@@ -108,18 +108,9 @@ public class ProdutoDAO {
         return retorno;
     }
     
-    public static boolean atualizarOld(Produto p){
-        return DatabaseConnection.executarUpdate("UPDATE produtos SET("
-                + "nome = " + "'" + p.getNome() + "'" + ","
-                + "quantidade = " + "'" + p.getDescricao() + "'" + ","
-                + "valor = " + "'" + p.getValor() + "'" + ","
-                + "descricao = " + "'" + p.getQuantidade() + "')"
-                + "WHERE id = " + p.getId());   
-    }
-    
     public static boolean excluir(int pID){
         return DatabaseConnection.executarUpdate("DELETE FROM produtos"
-                + "WHERE ID = " + pID);
+                + " WHERE ID = " + pID);
     }
     
     public static ArrayList<Produto> getProdutos(){
