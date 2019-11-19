@@ -5,8 +5,11 @@
  */
 package lojafloricultura.view;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -27,6 +30,7 @@ public class ClienteView extends javax.swing.JFrame {
         
         this.setExtendedState(MAXIMIZED_BOTH);
         lblID.setVisible(false);
+        LoadTable();
     }
     
     //Método auxiliar para desabilitar formulario Produto
@@ -85,8 +89,7 @@ public class ClienteView extends javax.swing.JFrame {
     
     public void LoadTable(){
         
-     
-        Cliente cliente = ClienteController.getClienteByCPF(txtCpfCliente.getText());
+        ArrayList<String[]> linhasClientes = ClienteController.getClientes();
         
         
         DefaultTableModel tmClientes = new DefaultTableModel();
@@ -108,12 +111,9 @@ public class ClienteView extends javax.swing.JFrame {
         
       
        
-        tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), 
-                                    cliente.getNome(), cliente.getCPF(), 
-                                    cliente.getEmail(), cliente.getEndereco(), 
-                                    cliente.getNumero(), cliente.getComplemento(), 
-                                    cliente.getSexo(), cliente.getEstadoCivil(),
-                                    cliente.getDataNasc(), cliente.getTelefone()});
+            for(String[] p:linhasClientes){
+            tmClientes.addRow(p);
+        }
         
         
        
@@ -498,9 +498,9 @@ public class ClienteView extends javax.swing.JFrame {
                 txtTelefone.getText()))
         {
                     
-            this.LoadTable();
-                    
-            JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso");
+                this.LoadTable();
+
+                JOptionPane.showMessageDialog(null,"Cliente cadastrado com sucesso");
             LimpaFormulario();
         }else{
             JOptionPane.showMessageDialog(null,"Falha ao cadastrar cliente");

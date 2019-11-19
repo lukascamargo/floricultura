@@ -40,8 +40,10 @@ public class ProdutoController {
         ArrayList<Produto> Produtos = ProdutoDAO.getProdutos();
         System.out.println(Produtos);
         ArrayList<String[]> listaProdutos = new ArrayList<>();
+       int n = 0;
         
-        for(int i = 0; i < Produtos.size(); i++){
+        if(Produtos.size()>0){
+           for(int i = 0; i < Produtos.size(); i++){
             listaProdutos.add(new String[]{
                String.valueOf(Produtos.get(i).getId()),
                Produtos.get(i).getNome(),
@@ -49,7 +51,10 @@ public class ProdutoController {
                String.valueOf(Produtos.get(i).getValor()),
                Produtos.get(i).getDescricao()
             });
+            } 
         }
+        
+        
         
         return listaProdutos;
     }

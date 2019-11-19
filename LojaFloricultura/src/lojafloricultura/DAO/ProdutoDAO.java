@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class ProdutoDAO {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
-    public static String SENHA = "root";
-    public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    public static String SENHA = "";
+    public static String URL = "jdbc:mysql://localhost:330/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
    
         
