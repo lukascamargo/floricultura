@@ -6,11 +6,15 @@
 package lojafloricultura.view;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lojafloricultura.controller.ClienteController;
+import lojafloricultura.controller.ProdutoController;
 import lojafloricultura.controller.VendaController;
 import lojafloricultura.model.Cliente;
+import lojafloricultura.model.Produto;
 
 /**
  *
@@ -182,6 +186,11 @@ public class VendaView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblCliente);
 
         btnAdicionaCliente.setText("Ok");
+        btnAdicionaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionaClienteActionPerformed(evt);
+            }
+        });
 
         btnExcluiCliente.setText("Remover");
         btnExcluiCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -269,22 +278,45 @@ public class VendaView extends javax.swing.JFrame {
         lblNome.setText("Nome:");
 
         btnPesquisaProduto.setText("Pesquisar");
+        btnPesquisaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaProdutoActionPerformed(evt);
+            }
+        });
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nome", "Descrição", "Quantidade no Estoquue"
+                "Id", "Nome", "Quantidade", "Descrição", "Quantidade no Estoquue"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tblProdutos);
 
         btnAdicionaProduto.setText("Ok");
+        btnAdicionaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionaProdutoActionPerformed(evt);
+            }
+        });
 
         lblQtd.setText("Quantidade:");
 
         btnExcluiProduto.setText("Remover");
+        btnExcluiProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluiProdutoActionPerformed(evt);
+            }
+        });
 
         btnCancelaProduto.setText("Cancelar");
         btnCancelaProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -361,11 +393,11 @@ public class VendaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Produto", "Preço Únitario", "Total da Compra"
+                "Id", "Produto", "Quantidade", "Preço Únitario", "Total da Compra"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -513,26 +545,19 @@ public class VendaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluiItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiItemActionPerformed
-        if(tblCarrinho.getRowCount()>0)
+        if(tblCarrinho.getRowCount() > 0)
         {
             //Resgato o número da linha pelo JTable
             int numeroLinha = tblCarrinho.getSelectedRow();
             
-            //Resgato o ID (oculto) do cliente pelo JTableModel
-            int IDcliente = Integer.parseInt(tblCarrinho.getModel().getValueAt(numeroLinha, 0).toString());
+            DefaultTableModel tmCarrinho = (DefaultTableModel)tblCarrinho.getModel();
             
-            //Realizo a exclusão do cliente pelo ID
-            if(true)
-            {
-                //this.LoadTable();
-                JOptionPane.showMessageDialog(this,"Cliente excluído da compra");
-            }else{
-                JOptionPane.showMessageDialog(this,"Falha ao excluir o cliente da compra!");
-            }
+            //Passo o indice da linha a ser removida
+            tmCarrinho.removeRow(numeroLinha);
         }
         else
         {
-            JOptionPane.showMessageDialog(this,"Não há clientes para excluir da compra!");
+            JOptionPane.showMessageDialog(this, "Selecione um produto à ser excluído!");
         }
     }//GEN-LAST:event_btnExcluiItemActionPerformed
 
@@ -561,47 +586,134 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelaProdutoActionPerformed
 
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
-//        try {
-//            Cliente cliente = new Cliente();
-//        
-//            if (!txtIdCliente.getText().trim().equals("")) {
-//                cliente = ClienteController.getClienteByCPF(txtIdCliente.getText());
-//            } else if (!txtCPFCliente.getText().trim().equals("")) {
-//                cliente = ClienteController.getClienteByCPF(txtCPFCliente.getText());
-//            } else if (!txtNomeCliente.getText().trim().equals("")) {
-//                cliente = ClienteController.getClienteByNome(txtNomeCliente.getText());
-//            } else {
-//                //ALERTA PARA O USUARIO PREENCHER UM DOS CAMPOS
-//            }
-//            
-//            DefaultTableModel tmClientes = new DefaultTableModel();
-//            tmClientes.addColumn("Id");
-//            tmClientes.addColumn("Nome");
-//            tmClientes.addColumn("CPF");
-//            tblCliente.setModel(tmClientes);
-//            
-//            tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), cliente.getNome(), cliente.getCPF()});
-//            
-//            DesabilitaFormularioCliente();
-//        } catch (Exception e) {
-//            // TODO: Excessao tratamento
-//        
-//        }
+        try {
+            //Instancio um novo cliente
+            Cliente cliente = new Cliente();
+            
+            //Verifico se a pesquisa será por Id, CPF ou Nome do Cliente
+            if (!txtIdCliente.getText().trim().equals("")) {
+                
+                cliente = ClienteController.getClienteById(Integer.parseInt(txtIdCliente.getText()));
+                
+            } else if (!txtCPFCliente.getText().trim().equals("")) {
+                
+                cliente = ClienteController.getClienteByCpfForBuy(txtCPFCliente.getText());
+                
+            } else if (!txtNomeCliente.getText().trim().equals("")) {
+                
+                cliente = ClienteController.getClienteByNome(txtNomeCliente.getText());
+                
+            } else {
+                //Caso nenhum dos campos for preenchidos, alerto o usuário para faze-lo
+                JOptionPane.showMessageDialog(null, "Preencha corretamente todos os campos para adicionar um cliente à compra!");
+            }
+            
+            //Populo a tabela de Clientes
+            DefaultTableModel tmClientes = new DefaultTableModel();
+            tmClientes.addColumn("Id");
+            tmClientes.addColumn("Nome");
+            tmClientes.addColumn("CPF");
+            tblCliente.setModel(tmClientes);
+            
+            tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), cliente.getNome(), cliente.getCPF()});
+            
+            //Após preencher a tabela desabilito o formulário de Cliente
+            //DesabilitaFormularioCliente();
+        } catch (Exception e) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, e);
+        }
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
     private void btnExcluiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiClienteActionPerformed
-        
+        if (tblCliente.getRowCount() > 0) {
+            //Resgato o número da linha pelo JTable
+            int numeroLinha = tblCliente.getSelectedRow();
+            
+            DefaultTableModel tmCliente = (DefaultTableModel)tblCliente.getModel();
+            
+            //Passo o indice da linha a ser removida
+            tmCliente.removeRow(numeroLinha);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente à ser excluído!");
+        }
     }//GEN-LAST:event_btnExcluiClienteActionPerformed
 
     private void txtIdClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdClienteKeyReleased
         if (!txtIdCliente.getText().trim().equals("")) {
-            
+            JOptionPane.showMessageDialog(null, "Campo só aceita números inteiros!");
         }
     }//GEN-LAST:event_txtIdClienteKeyReleased
 
     private void rboCredito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rboCredito1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rboCredito1ActionPerformed
+
+    private void btnAdicionaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaClienteActionPerformed
+        DesabilitaFormularioCliente();
+        LimpaFormularioCliente();
+        HabilitaFormularioProduto();
+        LimpaFormularioProduto();
+    }//GEN-LAST:event_btnAdicionaClienteActionPerformed
+
+    private void btnAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaProdutoActionPerformed
+        DesabilitaFormularioProduto();
+        LimpaFormularioProduto();
+    }//GEN-LAST:event_btnAdicionaProdutoActionPerformed
+
+    private void btnExcluiProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiProdutoActionPerformed
+        if (tblProdutos.getRowCount() > 0) {
+            //Resgato o número da linha pelo JTable
+            int numeroLinha = tblProdutos.getSelectedRow();
+            
+            DefaultTableModel tmCliente = (DefaultTableModel)tblProdutos.getModel();
+            
+            //Passo o indice da linha a ser removida
+            tmCliente.removeRow(numeroLinha);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um produto à ser excluído!");
+        }
+    }//GEN-LAST:event_btnExcluiProdutoActionPerformed
+
+    private void btnPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProdutoActionPerformed
+        try {
+            //Instancio um novo cliente
+            Produto produto = new Produto();
+            
+            //Verifico se a pesquisa será por Id, CPF ou Nome do Cliente
+            if (!txtIdProduto.getText().trim().equals("")) {
+                
+                //produto = ProdutoController.(Integer.parseInt(txtIdProduto.getText()));
+                
+            } else if (!txtNomeProduto.getText().trim().equals("")) {
+                
+                //produto = ProdutoController.(txtNomeProduto.getText());
+                
+            } else {
+                //Caso nenhum dos campos for preenchidos, alerto o usuário para faze-lo
+                JOptionPane.showMessageDialog(null, "Preencha corretamente todos os campos para adicionar um produto à compra!");
+            }
+            
+            int txtQtd = Integer.parseInt(String.valueOf(txtQtdProduto));
+            
+            //Verifica se a quantidade em estoque é menor ou maior do que a quantidade do pedido
+            if (txtQtd <= produto.getQuantidade()) {
+                //Populo a tabela de Clientes
+                DefaultTableModel tmClientes = new DefaultTableModel();
+                tmClientes.addColumn("Id");
+                tmClientes.addColumn("Nome");
+                tmClientes.addColumn("CPF");
+                tblCliente.setModel(tmClientes);
+
+                tmClientes.addRow(new String[] { String.valueOf(produto.getId()), 
+                    produto.getNome(), String.valueOf(txtQtdProduto), produto.getDescricao(), 
+                    String.valueOf(produto.getQuantidade()) });
+            } else {
+                JOptionPane.showMessageDialog(null, "A quantidade do pedido é maior do que o estoque!");
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_btnPesquisaProdutoActionPerformed
 
     /**
      * @param args the command line arguments

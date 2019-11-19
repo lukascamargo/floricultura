@@ -164,6 +164,33 @@ public class ClienteDAO {
         return listaClientes;
     }
     
+    public static Cliente getClienteByCpfForBuy(String cCPF) {
+        Cliente c = new Cliente();
+        
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
+                + "WHERE CPF = " + "'" + cCPF + "'");
+        try {
+            while(rs.next()){
+                c.setId(rs.getInt("ID"));
+                c.setNome(rs.getString("NOME"));
+                c.setCPF(rs.getString("CPF"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setSexo(rs.getString("SEXO"));
+                c.setEndereco(rs.getString("ENDERECO"));
+                c.setNumero(rs.getString("NUMERO"));
+                c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEstadoCivil(rs.getString("estadoCivil"));
+                c.setDataNasc(rs.getString("dataNasc"));
+                c.setTelefone(rs.getString("telefone"));
+            }
+        
+        } catch (SQLException ex){
+            c = null;
+        } 
+        
+        return c;
+    }
+    
     public static Cliente getClienteByNome(String cNome) {
         Cliente c = new Cliente();
         

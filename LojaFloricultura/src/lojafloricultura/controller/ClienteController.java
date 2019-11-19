@@ -78,8 +78,18 @@ public class ClienteController {
         return clientePesquisado;
     }
     
+    public static Cliente getClienteByCpfForBuy(String cpf){
+        Cliente clientePesquisado = ClienteDAO.getClienteByCpfForBuy(cpf);
+        return clientePesquisado;
+    }
+    
     public static Cliente getClienteByNome(String nome){
         Cliente clientePesquisado = ClienteDAO.getClienteByNome(nome);
+        return clientePesquisado;
+    }
+    
+    public static Cliente getClienteById(int id){
+        Cliente clientePesquisado = ClienteDAO.getClienteById(id);
         return clientePesquisado;
     }
 }
