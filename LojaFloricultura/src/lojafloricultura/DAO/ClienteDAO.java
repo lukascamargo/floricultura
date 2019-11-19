@@ -39,9 +39,17 @@ public class ClienteDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
         
-        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes (nome, CPF) values("
+        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes (nome, cpf, email, sexo, endereco, numero, complemento, estadoCivil, dataNasc, telefone) values("
                     + "'" + c.getNome() + "'" + "," + "'"
-                    + c.getCPF().replace(".", "").replace("-", "") + "'" + ")");
+                    + c.getCPF().replace(".", "").replace("-", "") + "'" + ")"+ "'"
+                    + c.getEmail() + "'" + ", " + "'"
+                    + c.getSexo() + "'" + ", " + "'"
+                    + c.getEndereco() + "'" + ", " + "'"
+                    + c.getNumero() + "'" + ", " + "'" 
+                    + c.getComplemento() + "'" + ", " + "'"
+                    + c.getEstadoCivil() + "'" + ", " + "'"
+                    + c.getDataNasc() + "'" + ", " + "'"
+                    + c.getTelefone() + "'" + ", " + "'");
         } catch(ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
             System.out.println(ex);
@@ -100,11 +108,11 @@ public class ClienteDAO {
                 c.setId(rs.getInt("id"));
                 c.setNome(rs.getString("nome"));
                 c.setCPF(rs.getString("cpf"));
-                c.setEmail(rs.getString("EMAIL"));
-                c.setSexo(rs.getString("SEXO"));
-                c.setEndereco(rs.getString("ENDERECO"));
-                c.setNumero(rs.getString("NUMERO"));
-                c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEmail(rs.getString("email"));
+                c.setSexo(rs.getString("sexo"));
+                c.setEndereco(rs.getString("endereco"));
+                c.setNumero(rs.getString("numero"));
+                c.setComplemento(rs.getString("complemento"));
                 c.setEstadoCivil(rs.getString("estadoCivil"));
                 c.setDataNasc(rs.getString("dataNasc"));
                 c.setTelefone(rs.getString("telefone"));
