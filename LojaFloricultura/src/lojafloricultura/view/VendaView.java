@@ -561,32 +561,32 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelaProdutoActionPerformed
 
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
-        try {
-            Cliente cliente = new Cliente();
-        
-            if (!txtIdCliente.getText().trim().equals("")) {
-                cliente = ClienteController.getClienteByCPF(txtIdCliente.getText());
-            } else if (!txtCPFCliente.getText().trim().equals("")) {
-                cliente = ClienteController.getClienteByCPF(txtCPFCliente.getText());
-            } else if (!txtNomeCliente.getText().trim().equals("")) {
-                cliente = ClienteController.getClienteByNome(txtNomeCliente.getText());
-            } else {
-                //ALERTA PARA O USUARIO PREENCHER UM DOS CAMPOS
-            }
-            
-            DefaultTableModel tmClientes = new DefaultTableModel();
-            tmClientes.addColumn("Id");
-            tmClientes.addColumn("Nome");
-            tmClientes.addColumn("CPF");
-            tblCliente.setModel(tmClientes);
-            
-            tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), cliente.getNome(), cliente.getCPF()});
-            
-            DesabilitaFormularioCliente();
-        } catch (Exception e) {
-            // TODO: Excessao tratamento
-        
-        }
+//        try {
+//            Cliente cliente = new Cliente();
+//        
+//            if (!txtIdCliente.getText().trim().equals("")) {
+//                cliente = ClienteController.getClienteByCPF(txtIdCliente.getText());
+//            } else if (!txtCPFCliente.getText().trim().equals("")) {
+//                cliente = ClienteController.getClienteByCPF(txtCPFCliente.getText());
+//            } else if (!txtNomeCliente.getText().trim().equals("")) {
+//                cliente = ClienteController.getClienteByNome(txtNomeCliente.getText());
+//            } else {
+//                //ALERTA PARA O USUARIO PREENCHER UM DOS CAMPOS
+//            }
+//            
+//            DefaultTableModel tmClientes = new DefaultTableModel();
+//            tmClientes.addColumn("Id");
+//            tmClientes.addColumn("Nome");
+//            tmClientes.addColumn("CPF");
+//            tblCliente.setModel(tmClientes);
+//            
+//            tmClientes.addRow(new String[] { String.valueOf(cliente.getId()), cliente.getNome(), cliente.getCPF()});
+//            
+//            DesabilitaFormularioCliente();
+//        } catch (Exception e) {
+//            // TODO: Excessao tratamento
+//        
+//        }
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
     private void btnExcluiClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiClienteActionPerformed

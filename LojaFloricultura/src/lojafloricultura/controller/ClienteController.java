@@ -6,6 +6,7 @@
  */
 package lojafloricultura.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import lojafloricultura.DAO.ClienteDAO;
 import lojafloricultura.model.Cliente;
@@ -39,24 +40,46 @@ public class ClienteController {
         return ClienteDAO.excluir(ID);
     }
     
-    public ArrayList<String[]> getClientes(){
-        ArrayList<String[]> listaClientes = new ArrayList<>();
+    public static ArrayList<String[]> getClientes() {
+        ArrayList<Cliente> cliente = ClienteDAO.getClientes();
+        ArrayList<String[]> clientePesquisado = new ArrayList<>();
         
-        return listaClientes;
+        
+        for(int i = 0; i < cliente.size(); i ++){
+        clientePesquisado.add(new String[]{
+            String.valueOf(cliente.get(i).getId()),cliente.get(i).getNome(),
+            cliente.get(i).getEmail(),cliente.get(i).getEndereco(),
+            String.valueOf(cliente.get(i).getNumero()),cliente.get(i).getComplemento(),
+            cliente.get(i).getSexo(),cliente.get(i).getEstadoCivil(),
+            String.valueOf(cliente.get(i).getDataNasc()),String.valueOf(cliente.get(i).getTelefone())
+        })
+        ;}
+        return clientePesquisado;
     }
     
-    public static Cliente getClienteByCPF(String CPF){
-        Cliente cliente = ClienteDAO.getClienteByCPF(CPF);
-        return cliente;
+    public static ArrayList<String[]> getClienteByCPF(String CPF)throws SQLException, ClassNotFoundException{
+        
+        ArrayList<Cliente> cliente = ClienteDAO.getClienteByCPF(CPF);
+        ArrayList<String[]> clientePesquisado = new ArrayList<>();
+        
+        
+        for(int i = 0; i < cliente.size(); i ++){
+        clientePesquisado.add(new String[]{
+            String.valueOf(cliente.get(i).getId()),cliente.get(i).getNome(),
+            cliente.get(i).getEmail(),cliente.get(i).getEndereco(),
+            String.valueOf(cliente.get(i).getNumero()),cliente.get(i).getComplemento(),
+            cliente.get(i).getSexo(),cliente.get(i).getEstadoCivil(),
+            String.valueOf(cliente.get(i).getDataNasc()),String.valueOf(cliente.get(i).getTelefone())
+        })
+        ;}
+        
+        
+        
+        return clientePesquisado;
     }
     
     public static Cliente getClienteByNome(String nome){
-        Cliente cliente = ClienteDAO.getClienteByNome(nome);
-        return cliente;
-    }
-    
-    public static Cliente getClienteById(int id){
-        Cliente cliente = ClienteDAO.getClienteById(id);
-        return cliente;
+        Cliente clientePesquisado = ClienteDAO.getClienteByNome(nome);
+        return clientePesquisado;
     }
 }
