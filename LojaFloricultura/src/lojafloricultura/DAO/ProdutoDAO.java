@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 /**
- *
+ * Essa DAO é de conexão com o banco de dados para todas as ocasiões de Produto
  * @author lukas.camargo
  */
 public class ProdutoDAO {
@@ -25,7 +25,14 @@ public class ProdutoDAO {
     private static Connection conexao = null;
    
         
-    
+    /**
+     * Este é o método que salva o Produto no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * @author lukas.fialho
+     * @param p - Produto
+     * @return boolean - informa se salvou no banco ou não
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static boolean salvar(Produto p){
         boolean retorno = false;
         
@@ -66,6 +73,14 @@ public class ProdutoDAO {
         return retorno;
     }
     
+    /**
+     * Esste método deve ser utilizado para atualizar as informações de Produto no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * @author lukas.fialho
+     * @param p - Produto que será atualizado
+     * @return boolean - informação se o insert de dados foi realizado ou não
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean atualizar(Produto p){
         boolean retorno = false;
         
@@ -108,11 +123,28 @@ public class ProdutoDAO {
         return retorno;
     }
     
+    /**
+     * Esse método deve ser utilizado para deletar algum produto do banco de dados.
+     * @author lukas.fialho
+     * @param pID - Produto ID
+     * @return boolean - Informação se o delete foi realizado ou não
+     * @version 1.0.
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean excluir(int pID){
         return DatabaseConnection.executarUpdate("DELETE FROM produtos"
                 + " WHERE ID = " + pID);
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar todos os Produtos cadastrados na base
+     * 
+     * @author lukas.fialho
+     * @return ArrayList
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public static ArrayList<Produto> getProdutos(){
         ArrayList<Produto> listaProdutos = new ArrayList<>();
         
@@ -148,6 +180,18 @@ public class ProdutoDAO {
         return listaProdutos;
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar o Produto cadastrado que possui um ID específico
+     * 
+     * @author lukas.fialho
+     * @param id - ID do Produto
+     * @return Produto
+     * @version 1.0
+     * @throws SQLException - Se existir alguma exceção de SQL
+     * @throws ClassNotFoundException - Se existir algum problema de criação de classe do SQL
+     * @since 18 de Novembro(Javadoc)
+    */
     public static Produto getProdutoById(int id) throws SQLException, ClassNotFoundException{
         Produto p = new Produto();
         
@@ -171,6 +215,16 @@ public class ProdutoDAO {
         return p;
     }
 
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar os Produtos cadastrados que possuem nomes parecidos com o do parametro informado
+     * 
+     * @author lukas.fialho
+     * @param nome - Nome do Produto a ser Pesquisado
+     * @return AraryList
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public static ArrayList<Produto> getProdutoByNome(String nome){
         ArrayList<Produto> listaProdutos = new ArrayList<>();
         

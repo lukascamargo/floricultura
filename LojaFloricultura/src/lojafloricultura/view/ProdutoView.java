@@ -15,7 +15,7 @@ import lojafloricultura.controller.ProdutoController;
 
 /**
  *
- * @author Família
+ * @author Ítalo
  */
 public class ProdutoView extends javax.swing.JFrame {
     ProdutoController produtoController = new ProdutoController();
@@ -31,6 +31,15 @@ public class ProdutoView extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
     }
     
+    /**
+     * 
+     * Essa função é utilizada para buscar todos os produtos e adicionar na tabela
+     * Também aproveita e limpa o formulario e desabilita ele
+     * 
+     * @author lukas.fialho
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void Recarregar(){
         ArrayList<String[]> linhasProdutos = produtoController.getProdutos();
         
@@ -50,10 +59,18 @@ public class ProdutoView extends javax.swing.JFrame {
         
         LimpaForm();
         FuncaoFormulario(false);
-        
-        
+       
     }
     
+    /**
+     * Essa funcao é utilizada para habilitar ou desabilitar o formulario
+     * A opcao (se será desabilitado ou habilitado) é passada via parametro
+     * 
+     * @author lukas.fialho
+     * @param opcao - Desabilitar (false) ou Habilitar(true)
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void FuncaoFormulario(boolean opcao){
         txtNomeProduto.setEnabled(opcao);
         txtDescriptionProduto.setEnabled(opcao);
@@ -307,6 +324,17 @@ public class ProdutoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este metodo verifica se é uma edição ou criação de um novo Produto
+     * Tambem, nao importando qual seja o tipo de operacao, faz validacao do formulario
+     * Dava pra fazer essa funcao de forma mais simples
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento do Botao Salvar
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnSaveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProdutoActionPerformed
         // TODO add your handling code here:
         if(editar && ValidarFormulario()){
@@ -346,14 +374,44 @@ public class ProdutoView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSaveProdutoActionPerformed
 
+    /**
+     * Função inativa
+     * 
+     * @deprecated Função inativa
+     * @author
+     * @param evt - Evento
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
+    /**
+     * Função inativa
+     * 
+     * @deprecated Função inativa
+     * @author
+     * @param evt - Evento
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void txtPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisarNomeActionPerformed
 
+    /**
+     * 
+     * Por mais que o nome da funcao esteja errado, esta funcao faz a pesquisa do Produto com base no nome do mesmo
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
         try {
             // TODO add your handling code here:
@@ -379,6 +437,15 @@ public class ProdutoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSave1ActionPerformed
 
+    /**
+     * Quando clicado no botão Editar, esta função busca qual é a linha que estava selecionada (erro se nenhuma selecionada) e envia para o formulario de edição
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento de Edit
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnEditProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProdutoActionPerformed
         // TODO add your handling code here:
         if(TabelaProdutos.getSelectedRow() == -1){
@@ -394,6 +461,16 @@ public class ProdutoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditProdutoActionPerformed
 
+    /**
+     * 
+     * Essa funcao inicia o formulario para criacao de um novo Produto
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento de Novo Produto
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnNewProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProdutoActionPerformed
         // TODO add your handling code here:
         editar = false;
@@ -403,6 +480,16 @@ public class ProdutoView extends javax.swing.JFrame {
         //habilitar o formulário
     }//GEN-LAST:event_btnNewProdutoActionPerformed
 
+    /**
+     * 
+     * Essa funcao deleta o Produto que estava selecionado na tabela
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento de Delete
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnDeleteProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProdutoActionPerformed
         // TODO add your handling code here:
         if(TabelaProdutos.getSelectedRow() == -1){
@@ -418,11 +505,30 @@ public class ProdutoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteProdutoActionPerformed
 
+    /**
+     * 
+     * Essa funcao cancela a cricao de um novo Produto e Recarrega
+     * 
+     * @author lukas.fialho
+     * @param evt - Evento de Cancelamento
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         Recarregar();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /**
+     * 
+     * Essa funcao limpa os campos do formulario
+     * 
+     * @author lukas.fialho
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void LimpaForm(){
         txtNomeProduto.setText("");
         txtQuantidadeProduto.setText("");
@@ -430,6 +536,15 @@ public class ProdutoView extends javax.swing.JFrame {
         txtDescriptionProduto.setText("");
     }
     
+    /**
+     * 
+     * Essa funcao valida cada um dos campos do formulario quando o evento Salvar é ativado
+     * 
+     * @author lukas.fialho
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private boolean ValidarFormulario() {
         
         if(this.txtNomeProduto.getText().equalsIgnoreCase("")) {

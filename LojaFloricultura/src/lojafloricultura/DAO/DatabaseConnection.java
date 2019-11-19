@@ -12,7 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe criada para trazer reaproveitamento de código durante a conexão com o banco de dados
+ * @deprecated Com o não funcionamento desta classe, as conexões com o banco de dados foram adicionadas a cada uma das DAOs
  * @author lukas.camargo
  */
 public class DatabaseConnection {
@@ -22,6 +23,15 @@ public class DatabaseConnection {
     public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
     
+    /**
+     * Essa função deve ser utilizada para executar algum tipo de inserção no banco de dados
+     * @deprecated Em cada DAO existe uma função que pode ser utilizada no lugar desta
+     * @author lukas.fialho
+     * @param query - Query que será executada (string)
+     * @return boolean - Se foi executada a Query ou não
+     * @version 0.0 
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static boolean executarUpdate(String query){
         boolean retorno = false;
         
@@ -61,6 +71,15 @@ public class DatabaseConnection {
         
     }
 
+    /**
+     * Essa função deve ser utilizada para executar algum tipo de busca no banco de dados
+     * @deprecated Em cada DAO existe uma função que pode ser utilizada no lugar desta
+     * @author lukas.fialho
+     * @param query - Query que será exeutada (string)
+     * @return ResultSet - Resultado da Query
+     * @version 0.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static ResultSet executarQuery(String query){
         System.out.println("Executar Query");
         ResultSet retorno = null;  
@@ -93,7 +112,13 @@ public class DatabaseConnection {
         return retorno;
     }
     
-    
+    /**
+     * Essa função deve ser utilizada para reaproveitamento de código na hora de fechar a conexão
+     * @deprecated Em cada DAO existe uma função que pode ser utilizada no lugar desta
+     * @author lukas.fialho
+     * @version 0.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     private static void closeConnection() {
         try {
              if(conexao != null){
