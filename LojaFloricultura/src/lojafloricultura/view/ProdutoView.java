@@ -36,7 +36,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * Essa função é utilizada para buscar todos os produtos e adicionar na tabela
      * Também aproveita e limpa o formulario e desabilita ele
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @version 1.0
      * @since 18 de Novembro (Javadoc)
     */
@@ -66,7 +66,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * Essa funcao é utilizada para habilitar ou desabilitar o formulario
      * A opcao (se será desabilitado ou habilitado) é passada via parametro
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param opcao - Desabilitar (false) ou Habilitar(true)
      * @version 1.0
      * @since 18 de Novembro (Javadoc)
@@ -329,7 +329,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * Tambem, nao importando qual seja o tipo de operacao, faz validacao do formulario
      * Dava pra fazer essa funcao de forma mais simples
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento do Botao Salvar
      * @return void
      * @version 1.0
@@ -406,7 +406,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Por mais que o nome da funcao esteja errado, esta funcao faz a pesquisa do Produto com base no nome do mesmo
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento do Botão
      * @return void
      * @version 1.0
@@ -440,7 +440,7 @@ public class ProdutoView extends javax.swing.JFrame {
     /**
      * Quando clicado no botão Editar, esta função busca qual é a linha que estava selecionada (erro se nenhuma selecionada) e envia para o formulario de edição
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento de Edit
      * @return void
      * @version 1.0
@@ -465,7 +465,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Essa funcao inicia o formulario para criacao de um novo Produto
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento de Novo Produto
      * @return void
      * @version 1.0
@@ -484,7 +484,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Essa funcao deleta o Produto que estava selecionado na tabela
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento de Delete
      * @return void
      * @version 1.0
@@ -509,7 +509,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Essa funcao cancela a cricao de um novo Produto e Recarrega
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @param evt - Evento de Cancelamento
      * @return void
      * @version 1.0
@@ -524,7 +524,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Essa funcao limpa os campos do formulario
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @return void
      * @version 1.0
      * @since 18 de Novembro (Javadoc)
@@ -540,7 +540,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * 
      * Essa funcao valida cada um dos campos do formulario quando o evento Salvar é ativado
      * 
-     * @author lukas.fialho
+     * @author lukas.fialho, Italo
      * @return void
      * @version 1.0
      * @since 18 de Novembro (Javadoc)
