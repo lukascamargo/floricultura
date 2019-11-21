@@ -17,10 +17,28 @@ public class Venda {
     
     private int codigo;
     private Cliente cliente;
-    private ArrayList<Produto> produtos;
+    private ArrayList<ItemVenda> produtos;
     private double valorTotal;
     private Date dataDaCompra;
     private Date dataAtualizacao;
+    private int desconto;
+    private String pagamento;
+
+    public void setDesconto(int desconto) {
+        this.desconto = desconto;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public int getDesconto() {
+        return desconto;
+    }
+
+    public String getPagamento() {
+        return pagamento;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -30,7 +48,7 @@ public class Venda {
         return cliente;
     }
 
-    public ArrayList<Produto> getProdutos() {
+    public ArrayList<ItemVenda> getProdutos() {
         return produtos;
     }
 
@@ -54,7 +72,7 @@ public class Venda {
         this.cliente = cliente;
     }
 
-    public void setProdutos(ArrayList<Produto> produtos) {
+    public void setProdutos(ArrayList<ItemVenda> produtos) {
         this.produtos = produtos;
     }
 
@@ -72,23 +90,23 @@ public class Venda {
     
     public Venda(){}
     
-    public Venda(Cliente cliente, ArrayList<Produto> produtos){
+    public Venda(Cliente cliente, ArrayList<ItemVenda> produtos){
         this.cliente = cliente;
         this.produtos = produtos;
         
         for(int i = 0; i < produtos.size(); i++){
-            this.valorTotal += produtos.get(i).getValor();
+            this.valorTotal += produtos.get(i).getPrecoTotal();
         }
     }
    
     
-    public Venda(Cliente cliente, ArrayList<Produto> produtos, double valor){
+    public Venda(Cliente cliente, ArrayList<ItemVenda> produtos, double valor){
         this.cliente = cliente;
         this.produtos = produtos;
         this.valorTotal = valor;
     }
     
-    public Venda(int codigo, Cliente cliente, ArrayList<Produto> produtos, double valor){
+    public Venda(int codigo, Cliente cliente, ArrayList<ItemVenda> produtos, double valor){
         this.codigo = codigo;
         this.cliente = cliente;
         this.produtos = produtos;
