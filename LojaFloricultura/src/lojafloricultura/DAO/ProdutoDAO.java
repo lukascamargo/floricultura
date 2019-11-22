@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class ProdutoDAO {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
-    public static String SENHA = "";
-    public static String URL = "jdbc:mysql://localhost:330/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    public static String SENHA = "root";
+    public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
    
         
@@ -153,9 +153,10 @@ public class ProdutoDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
             ResultSet rs = comando.executeQuery("SELECT * FROM produtos");
-            
+            System.out.println(rs);
             while(rs.next()){
                 Produto p = new Produto();
+                System.out.println(p);
                 p.setId(rs.getInt("id"));
                 p.setQuantidade(rs.getInt("quantidade"));
                 p.setValor(rs.getDouble("valor") + 50);

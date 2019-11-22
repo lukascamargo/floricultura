@@ -22,3 +22,15 @@ estadoCivil varchar(50) not null,
 dataNasc varchar (50) null,
 telefone varchar(150) not null,
 primary key(id));
+
+create table itemvenda(
+	id int not null auto_increment,
+    produtoId int not null,
+    quantidade int not null,
+    precoUnitario double not null,
+    precoTotal double not null,
+    primary key(id),
+    foreign key(produtoId) references produtos(id)
+);
+
+select * from produtos;
