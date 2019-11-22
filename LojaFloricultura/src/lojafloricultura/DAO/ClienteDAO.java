@@ -25,7 +25,7 @@ public class ClienteDAO {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
     public static String SENHA = "";
-    public static String URL = "jdbc:mysql://localhost:3307/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
     
     
@@ -39,17 +39,17 @@ public class ClienteDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
         
-        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes (nome, cpf, email, sexo, endereco, numero, complemento, estadoCivil, dataNasc, telefone) values("
+        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes values("
                     + "'" + c.getNome() + "'" + "," + "'"
-                    + c.getCPF().replace(".", "").replace("-", "") + "'" + ")"+ "'"
+                    + c.getCPF()  + "'" + ", " + "'"
                     + c.getEmail() + "'" + ", " + "'"
                     + c.getSexo() + "'" + ", " + "'"
                     + c.getEndereco() + "'" + ", " + "'"
                     + c.getNumero() + "'" + ", " + "'" 
                     + c.getComplemento() + "'" + ", " + "'"
                     + c.getEstadoCivil() + "'" + ", " + "'"
-                    + c.getDataNasc() + "'" + ", " + "'"
-                    + c.getTelefone() + "'" + ", " + "'");
+                    + c.getDataNasc().replace("/", "") + "'" + ", " + "'"
+                    + c.getTelefone()+ ")");
         } catch(ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
             System.out.println(ex);
@@ -72,7 +72,7 @@ public class ClienteDAO {
     public static boolean atualizar(Cliente c){
         return DatabaseConnection.executarUpdate("UPDATE Clientes SET"
                 + "NOME = " + "'" + c.getNome() + "'" + ","
-                + "CPF = " + "'" + c.getCPF().replace(".","").replace("-","") + "'" + ","
+                + "CPF = " + "'" + c.getCPF()+ "'" + ","
                 + "EMAIL = " + "'" + c.getEmail() + "'" + ","
                 + "SEXO = " + "'" + c.getSexo() + "'" + ","
                 + "ENDERECO = " + "'" +c.getEndereco() + "'" + ","
@@ -85,9 +85,49 @@ public class ClienteDAO {
     }
     
     public static boolean excluir(int cID){
-        return DatabaseConnection.executarUpdate("DELETE FROM Clientes"
-                + "WHERE ID = " + cID);
+        boolean retorno = false;
+        Connection conexao = null;
+        Statement instrucaoSQL = null; 
+        
+        try {
+            //Carrega a classe responsável pelo driver
+            Class.forName(DRIVER);
+            
+            //Tenta estabeler a conexão com o SGBD e cria o objeto de conexão
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);     
+            instrucaoSQL = conexao.createStatement(); 
+            
+            int linhasAfetadas = instrucaoSQL.executeUpdate("DELETE FROM clientes where id= " + cID);
+            
+            if(linhasAfetadas>0)
+            {
+                retorno = true;
+            }
+            else{
+                retorno = false;
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver não encontrado.");
+            retorno = false;
+        } catch (SQLException ex) {
+            System.out.println("Erro no comando SQL.");
+            retorno = false;
+        
+        }finally{
+            
+            //Libero os recursos da memória
+            try {
+                if(instrucaoSQL!=null)
+                    instrucaoSQL.close();
+                if(conexao!=null)
+                  conexao.close();
+              } catch (SQLException ex) {
+             }
+        }
+        return retorno;
     }
+
     
     public static ArrayList<Cliente> getClientes() {
         Connection conexao = null;
