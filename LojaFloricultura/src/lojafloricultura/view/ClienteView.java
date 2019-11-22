@@ -107,7 +107,7 @@ public class ClienteView extends javax.swing.JFrame {
         tblClientes.setModel(tmClientes);
         
        
-        tblClientes.removeColumn(tblClientes.getColumnModel().getColumn(0));
+       // tblClientes.removeColumn(tblClientes.getColumnModel().getColumn(0));
         
       
        
@@ -150,7 +150,7 @@ public class ClienteView extends javax.swing.JFrame {
         lblEstadoCivil = new javax.swing.JLabel();
         lblDataNasc = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
-        cboEstadoCivil = new javax.swing.JComboBox<>();
+        cboEstadoCivil = new javax.swing.JComboBox<String>();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtDataNasc = new javax.swing.JFormattedTextField();
         lblID = new javax.swing.JLabel();
@@ -222,7 +222,7 @@ public class ClienteView extends javax.swing.JFrame {
 
         lblTelefone.setText(" Telefone *");
 
-        cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Separado", "Divorciado", "Viúvo" }));
+        cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Solteiro", "Casado", "Separado", "Divorciado", "Viúvo" }));
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -387,6 +387,11 @@ public class ClienteView extends javax.swing.JFrame {
         });
 
         btnEditCliente.setText("Editar");
+        btnEditCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditClienteActionPerformed(evt);
+            }
+        });
 
         btnDeleteCliente.setText("Excluir");
         btnDeleteCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -441,21 +446,16 @@ public class ClienteView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+                    .addComponent(pnlCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(btnEditCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDeleteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(pnlCliente1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pnlCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -464,7 +464,11 @@ public class ClienteView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeleteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -472,18 +476,34 @@ public class ClienteView extends javax.swing.JFrame {
                 .addComponent(pnlCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeleteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClienteActionPerformed
-        // TODO add your handling code here:
+        if(tblClientes.getRowCount()>0)
+        {
+            //Resgato o número da linha pelo JTable
+            int numeroLinha = tblClientes.getSelectedRow();
+            
+           
+            int ID= Integer.parseInt(tblClientes.getModel().getValueAt(numeroLinha, 0).toString());
+            
+           
+            if(ClienteController.excluir( ID ))
+            {
+                this.LoadTable();
+                JOptionPane.showMessageDialog(this,"Cliente excluído da base de dados");
+            }else{
+                JOptionPane.showMessageDialog(this,"Falha ao excluir o cliente!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Não há clientes para excluir!");
+        }
     }//GEN-LAST:event_btnDeleteClienteActionPerformed
 
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
@@ -491,11 +511,11 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(ClienteController.salvar(txtNomeCliente.getText(), txtCpfCliente.getText(), 
+        if(ClienteController.salvar(txtNomeCliente.getText(), txtCpfCliente.getText().replace("-", "").replace(".", ""), 
                 txtEmail.getText(), txtEndereco.getText(), txtNumero.getText(), 
                 txtComplemento.getText(),btgSexo.getSelection().getActionCommand(), 
-                cboEstadoCivil.getSelectedItem().toString(), txtDataNasc.getText(),
-                txtTelefone.getText()))
+                cboEstadoCivil.getSelectedItem().toString(), txtDataNasc.getText().replace("/", ""),
+                txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "")))
         {
                     
                 this.LoadTable();
@@ -527,6 +547,39 @@ public class ClienteView extends javax.swing.JFrame {
     private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSave1ActionPerformed
+
+    private void btnEditClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditClienteActionPerformed
+             if(tblClientes.getRowCount()>0)
+        {
+            //Verifico se o usuário selecionou alguma linha (Primeira linha = 0)
+            if(tblClientes.getSelectedRow()>=0)
+            {
+                HabilitaFormulario();
+                
+                //Variável acessória para identifcar se o formulário está em modo de edição ou alteração
+                //modoTela = "Editar";
+
+                //Atribuo os valores que estão na linha selecionada para a tabela
+                lblID.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 0).toString());
+                txtNomeCliente.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 1).toString());
+                txtCpfCliente.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 2).toString());
+                txtEndereco.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 3).toString());
+                txtNumero.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 4).toString());
+                txtComplemento.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 5).toString());
+                cboEstadoCivil.setActionCommand(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 6).toString());
+                txtDataNasc.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 7).toString());
+                txtTelefone.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 8).toString());
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Selecione um carro para editar!");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Não há carros para editar!");
+        }
+    }//GEN-LAST:event_btnEditClienteActionPerformed
 
     /**
      * @param args the command line arguments
