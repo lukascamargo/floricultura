@@ -24,7 +24,7 @@ public class ClienteDAO {
     
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     public static String LOGIN = "root";
-    public static String SENHA = "";
+    public static String SENHA = "root";
     public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
     
@@ -39,7 +39,7 @@ public class ClienteDAO {
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
         
-        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes values("
+        int linhasAfetadas = comando.executeUpdate("INSERT INTO clientes(nome, CPF, email, sexo, endereco, numero, complemento, estadoCivil, dataNasc, telefone) VALUES("
                     + "'" + c.getNome() + "'" + "," + "'"
                     + c.getCPF()  + "'" + ", " + "'"
                     + c.getEmail() + "'" + ", " + "'"
@@ -49,7 +49,7 @@ public class ClienteDAO {
                     + c.getComplemento() + "'" + ", " + "'"
                     + c.getEstadoCivil() + "'" + ", " + "'"
                     + c.getDataNasc().replace("/", "") + "'" + ", " + "'"
-                    + c.getTelefone()+ ")");
+                    + c.getTelefone()+ "')");
         } catch(ClassNotFoundException ex){
             System.out.println("Driver não encontrado.");
             System.out.println(ex);
@@ -141,7 +141,7 @@ public class ClienteDAO {
             Class.forName(DRIVER);
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);  
             instrucaoSQL = conexao.createStatement();
-            rs = instrucaoSQL.executeQuery("SELECT * FROM Clientes");
+            rs = instrucaoSQL.executeQuery("SELECT * FROM clientes");
             
             while(rs.next()){
                 Cliente c = new Cliente();
