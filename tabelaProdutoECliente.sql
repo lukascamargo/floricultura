@@ -23,14 +23,28 @@ dataNasc varchar (50) null,
 telefone varchar(150) not null,
 primary key(id));
 
+
 create table itemvenda(
-	id int not null auto_increment,
+    id int not null auto_increment,
     produtoId int not null,
+    vendaId int not null,
     quantidade int not null,
     precoUnitario double not null,
     precoTotal double not null,
     primary key(id),
-    foreign key(produtoId) references produtos(id)
+    foreign key(produtoId) references produtos(id),
+    foreign key(vendaId) references vendas(id)
 );
 
-select * from produtos;
+create table vendas(
+    id int not null auto_increment,
+    clienteId int,
+    valorTotal double,
+    dataDaCompra date,
+    dataAtualizacao date,
+    desconto int,
+    pagamento varchar(45),
+    primary key(id),
+    foreign key(clientId) references clientes(id)
+);
+

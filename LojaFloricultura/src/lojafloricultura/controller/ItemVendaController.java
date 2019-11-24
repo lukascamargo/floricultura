@@ -5,10 +5,19 @@
  */
 package lojafloricultura.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import lojafloricultura.model.ItemVenda;
 /**
  *
  * @author lukas.camargo
  */
 public class ItemVendaController {
+    
+    public ArrayList<String[]> criarItemVenda() {
+        ArrayList<String[]> itemVenda = new ArrayList<>();
+        
+        return itemVenda;
+    } 
     
 }
