@@ -45,6 +45,6 @@ create table vendas(
     desconto int,
     pagamento varchar(45),
     primary key(id),
-    foreign key(clientId) references clientes(id)
+    foreign key(clienteId) references clientes(id)
 );
 
