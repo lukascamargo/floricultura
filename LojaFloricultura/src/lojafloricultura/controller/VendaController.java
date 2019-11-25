@@ -85,6 +85,29 @@ public class VendaController {
         venda.setDataAtualizacao(new Date());
         return VendaDAO.atualizarVenda(venda);
     }
-      
+    
+    /**
+     * 
+     * Este método é utilizado para fazer pesquisas por range de data, para relatórios
+     * 
+     * @author lukas.fialho
+     * @param dataInicail Date - Data da compra inicial
+     * @param dataFinal Date - Data da compra final
+     * 
+     * @return String[] - Lista de Vendas com range de data
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
+    public static ArrayList<String[]> relatorioVendas(String dataInicail, String dataFinal){
+        //java.sql.Date dataInicialSql = new java.sql.Date(dataInicail);
+        //java.sql.Date dataFinalSql = new java.sql.Date(dataFinal);
+        
+        ArrayList<String[]> listaVendas = new ArrayList<>();
+        
+        //listaVendas = VendaDAO.relatorioVendas(dataInicialSql, dataFinalSql);
+        
+        return listaVendas;
+    }
+    
       
 }

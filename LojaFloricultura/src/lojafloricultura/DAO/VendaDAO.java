@@ -31,30 +31,28 @@ public class VendaDAO {
     private static Connection conexao = null;
     
     /**
-     * 
-     * Este é o método que salva a Venda no banco de dados. 
-     * Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
-     * 
-     * @author lukas.fialho
-     * @param v - Venda
-     * @return boolean - informa se salvou no banco ou não
-     * @version 1.0
-     * @since 18 de Novembro (data do Javadoc)
+    * Função inativa
+    * 
+    * @deprecated Função inativa
+    * @author
+    * @param v - Venda
+    * @return void
+    * @version 1.0
+    * @since 18 de Novembro (Javadoc)
     */
     public static boolean salvar(Venda v){
         return DatabaseConnection.executarUpdate("");
     }
     
     /**
-     * 
-     * Esste método deve ser utilizado para atualizar as informações de uma Venda 
-     * no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
-     * 
-     * @author lukas.fialho
-     * @param v - Venda que será atualizada
-     * @return boolean - informação se o insert de dados foi realizado ou não
-     * @version 1.0
-     * @since 18 de Novembro (Data do Javadoc)
+    * Função inativa
+    * 
+    * @deprecated Função inativa
+    * @author
+    * @param v - Venda
+    * @return void
+    * @version 1.0
+    * @since 18 de Novembro (Javadoc)
     */
     public static boolean atualizar(Venda v){
         return DatabaseConnection.executarUpdate("");
@@ -238,5 +236,44 @@ public class VendaDAO {
         
         return v;
     }
+    
+    /**
+     * 
+     * Este método é utilizado para fazer pesquisas por range de data, para relatórios
+     * 
+     * @author lukas.fialho
+     * @param dataInicail Date - Data da compra inicial
+     * @param dataFinal Date - Data da compra final
+     * 
+     * @return Venda - Lista de Vendas com range de data
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
+    public static ArrayList<String[]> relatorioVendas(Date dataInicail, Date dataFinal){
+        //java.sql.Date dataInicialSql = new java.sql.Date(dataInicail.getTime());
+        //java.sql.Date dataFinalSql = new java.sql.Date(dataFinal.getTime());
         
+        ArrayList<String[]> listaVendas = new ArrayList<>();
+        
+        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Vendas "
+                + "WHERE dataDaCompra >= " + dataInicail 
+                + " AND dataDaCompra <=  " + dataFinal);
+        
+        try {
+            while(rs.next()){
+                Venda v = new Venda();
+                
+                v.setCliente(rs.getInt("CLIENTEID"));
+                v.setCodigo(rs.getInt("ID"));
+                v.setDataDaCompra(rs.getDate("DATADACOMPRA"));
+                v.setValorTotal(rs.getDouble("VALORTOTAL"));
+                
+                //listaVendas.add(v);
+            }
+        } catch (SQLException ex){
+            listaVendas = null;
+        }
+        
+        return listaVendas;
+    }
 }

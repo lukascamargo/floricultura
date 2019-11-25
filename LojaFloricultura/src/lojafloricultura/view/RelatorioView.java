@@ -5,6 +5,17 @@
  */
 package lojafloricultura.view;
 
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import lojafloricultura.controller.VendaController;
+import lojafloricultura.model.Venda;
+
 /**
  *
  * @author felipe.fhenriques
@@ -34,8 +45,8 @@ public class RelatorioView extends javax.swing.JFrame {
         lblDataFinal = new javax.swing.JLabel();
         txtDataFinal = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblRelatorio = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblDataInicial1 = new javax.swing.JLabel();
         lblDataFinal1 = new javax.swing.JLabel();
@@ -61,6 +72,11 @@ public class RelatorioView extends javax.swing.JFrame {
                 txtDataInicialActionPerformed(evt);
             }
         });
+        txtDataInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataInicialKeyTyped(evt);
+            }
+        });
 
         lblDataFinal.setText("Data final:");
 
@@ -69,8 +85,13 @@ public class RelatorioView extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDataFinal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataFinalKeyTyped(evt);
+            }
+        });
 
-        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -78,9 +99,14 @@ public class RelatorioView extends javax.swing.JFrame {
                 "ID Cliente", "N° da Compra", "Data da Compra", "Valor Total"
             }
         ));
-        jScrollPane1.setViewportView(tblProduto);
+        jScrollPane1.setViewportView(tblRelatorio);
 
-        jButton1.setText("Pesquisar");
+        btnSearch.setText("Pesquisar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlAnaliticoLayout = new javax.swing.GroupLayout(pnlAnalitico);
         pnlAnalitico.setLayout(pnlAnaliticoLayout);
@@ -102,7 +128,7 @@ public class RelatorioView extends javax.swing.JFrame {
                             .addComponent(txtDataInicial)
                             .addComponent(txtDataFinal))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(btnSearch)
                         .addGap(547, 547, 547))))
         );
         pnlAnaliticoLayout.setVerticalGroup(
@@ -116,7 +142,7 @@ public class RelatorioView extends javax.swing.JFrame {
                 .addGroup(pnlAnaliticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataFinal)
                     .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnSearch))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -234,6 +260,51 @@ public class RelatorioView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataInicial2ActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        if (ValidarFormulario()) {
+            //try {
+                ArrayList<String[]> linhasRelatorio = VendaController.relatorioVendas(txtDataInicial.getText(), txtDataFinal.getText());
+            
+                System.out.println(linhasRelatorio);
+        
+                DefaultTableModel tmRelatorio = new DefaultTableModel();
+                tmRelatorio.addColumn("ID");
+                tmRelatorio.addColumn("Nome");
+                tmRelatorio.addColumn("Quantidade");
+                tmRelatorio.addColumn("Valor");
+                tmRelatorio.addColumn("Descricao");
+                tblRelatorio.setModel(tmRelatorio);
+
+                for(String[] p:linhasRelatorio){
+                    tmRelatorio.addRow(p);
+                }
+            
+            //} catch (SQLException ex) {
+            //    Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (ClassNotFoundException ex) {
+            //    Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+        } else {
+            JOptionPane.showMessageDialog(this, "Preencha os campos de data para preencher o relatório!");
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtDataInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataInicialKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDataInicialKeyTyped
+
+    private void txtDataFinalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataFinalKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDataFinalKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -269,8 +340,26 @@ public class RelatorioView extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * 
+     * Essa funcao valida cada um dos campos do formulario quando o evento Pesquisar é ativado
+     * 
+     * @author lukas.fialho, Italo
+     * @return boolean
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private boolean ValidarFormulario() {
+        //Range de Data obrigatório
+        if(this.txtDataInicial.getText().equalsIgnoreCase("") || this.txtDataFinal.getText().equalsIgnoreCase(""))
+            return false;
+        
+        
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -281,8 +370,8 @@ public class RelatorioView extends javax.swing.JFrame {
     private javax.swing.JLabel lblDataInicial1;
     private javax.swing.JPanel pnlAnalitico;
     private javax.swing.JTabbedPane pnlRelatorio;
-    private javax.swing.JTable tblProduto;
     private javax.swing.JTable tblProduto1;
+    private javax.swing.JTable tblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     private javax.swing.JFormattedTextField txtDataInicial1;
