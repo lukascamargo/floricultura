@@ -137,12 +137,12 @@ public class VendaView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNomeCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtCPFCliente = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtIdCliente = new javax.swing.JTextField();
         txtEmailCliente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtCPFCliente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         lblID = new javax.swing.JLabel();
         txtIdProduto = new javax.swing.JTextField();
@@ -200,6 +200,17 @@ public class VendaView extends javax.swing.JFrame {
 
         jLabel3.setText("E-mail:");
 
+        try {
+            txtCPFCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCPFCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCPFClienteKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -225,7 +236,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(txtCPFCliente)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -236,9 +247,9 @@ public class VendaView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisaCliente)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -759,6 +770,14 @@ public class VendaView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelaCompraActionPerformed
 
+    private void txtCPFClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFClienteKeyTyped
+        String numeros = "0123456789";
+
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCPFClienteKeyTyped
+
     private boolean ValidarFormulario() {
         if(this.txtIdCliente.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"Não há cliente selecionado!");
@@ -768,6 +787,27 @@ public class VendaView extends javax.swing.JFrame {
         if(this.txtDesconto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"Defina um desconto para a Venda, mesmo que 0!");
             return false;
+        }
+        
+        try {
+
+            int valorConvertido = Integer.parseInt(this.txtDesconto.getText());
+            System.out.println(valorConvertido);
+            if(valorConvertido < 0){
+                JOptionPane.showMessageDialog(this,"Desconto deve ser um numero maior ou igual a zero!!");
+                return false;
+            }
+        
+        } catch(NumberFormatException e){
+            
+            JOptionPane.showMessageDialog(this,"Desconto deve ser um numero inteiro!!");
+            return false;
+        
+        }catch(IllegalArgumentException e){
+            
+            JOptionPane.showMessageDialog(this,"Digite um valor para Desconto");  
+            return false;
+        
         }
         
         if(!rboDinheiro.isSelected() && !rboDebito.isSelected() && !rboCredito.isSelected()){
@@ -918,7 +958,7 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTable tblCarrinho;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtBuscarProdutoPorNome;
-    private javax.swing.JTextField txtCPFCliente;
+    private javax.swing.JFormattedTextField txtCPFCliente;
     private javax.swing.JTextField txtDesconto;
     private javax.swing.JTextField txtEmailCliente;
     private javax.swing.JTextField txtIdCliente;
