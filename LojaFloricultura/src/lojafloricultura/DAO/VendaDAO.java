@@ -239,41 +239,58 @@ public class VendaDAO {
     
     /**
      * 
-     * Este método é utilizado para fazer pesquisas por range de data, para relatórios
+     * Esste método deve ser utilizado para criar uma Venda 
      * 
      * @author lukas.fialho
-     * @param dataInicail Date - Data da compra inicial
-     * @param dataFinal Date - Data da compra final
-     * 
-     * @return Venda - Lista de Vendas com range de data
+     * @param v - Venda que será criada
+     * @return boolean
      * @version 1.0
      * @since 18 de Novembro (Data do Javadoc)
     */
-    public static ArrayList<String[]> relatorioVendas(Date dataInicail, Date dataFinal){
-        //java.sql.Date dataInicialSql = new java.sql.Date(dataInicail.getTime());
-        //java.sql.Date dataFinalSql = new java.sql.Date(dataFinal.getTime());
-        
-        ArrayList<String[]> listaVendas = new ArrayList<>();
-        
-        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Vendas "
-                + "WHERE dataDaCompra >= " + dataInicail 
-                + " AND dataDaCompra <=  " + dataFinal);
+    public static ArrayList<Venda> buscarVendaPorDatas(String dataInicial, String dataFinal){
+        ArrayList<Venda> listaVendas = new ArrayList<>();
         
         try {
+            Class.forName(DRIVER);
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            Statement comando = conexao.createStatement();
+            PreparedStatement pStmt = conexao.prepareStatement(
+                    "SELECT * FROM vendas WHERE dataDaCompra BETWEEN (?) AND (?)"
+            );
+            pStmt.setString(1, dataInicial);
+            pStmt.setString(2, dataFinal);
+            ResultSet rs = pStmt.executeQuery();
+            System.out.println("Result Set: " + rs);
+            
             while(rs.next()){
-                Venda v = new Venda();
-                
-                v.setCliente(rs.getInt("CLIENTEID"));
-                v.setCodigo(rs.getInt("ID"));
-                v.setDataDaCompra(rs.getDate("DATADACOMPRA"));
-                v.setValorTotal(rs.getDouble("VALORTOTAL"));
-                
-                //listaVendas.add(v);
+                Venda venda = new Venda();
+                venda.setCodigo(rs.getInt("id"));
+                venda.setCliente(rs.getInt("clienteId"));
+                venda.setDataDaCompra(rs.getDate("dataDaCompra"));
+                venda.setDataAtualizacao(rs.getDate("dataAtualizacao"));
+                venda.setDesconto(rs.getInt("desconto"));
+                venda.setPagamento(rs.getString("pagamento"));
+                venda.setValorTotal(rs.getDouble("valorTotal"));
+                listaVendas.add(venda);
             }
+            
         } catch (SQLException ex){
+            System.out.println("SQL Exception: " + ex);
             listaVendas = null;
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver não encontrado.");
+            listaVendas = null;
+        } finally {
+            try {
+                if(conexao != null)
+                    conexao.close();
+            } catch (SQLException ex) {
+                System.out.println("SQL Exceptison: " + ex);
+            }
         }
         
         return listaVendas;
     }
+        
+
 }

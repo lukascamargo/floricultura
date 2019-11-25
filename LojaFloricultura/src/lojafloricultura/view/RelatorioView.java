@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lojafloricultura.controller.VendaController;
+import lojafloricultura.controller.ItemVendaController;
 import lojafloricultura.model.Venda;
 
 /**
@@ -21,6 +22,8 @@ import lojafloricultura.model.Venda;
  * @author felipe.fhenriques
  */
 public class RelatorioView extends javax.swing.JFrame {
+    
+    ItemVendaController itemVendaController = new ItemVendaController();
 
     /**
      * Creates new form RelatorioView
@@ -48,13 +51,12 @@ public class RelatorioView extends javax.swing.JFrame {
         tblRelatorio = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        lblDataInicial1 = new javax.swing.JLabel();
         lblDataFinal1 = new javax.swing.JLabel();
-        txtDataInicial1 = new javax.swing.JFormattedTextField();
-        txtDataInicial2 = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProduto1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        txtIdCliente = new javax.swing.JTextField();
+        txtIdVenda = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -150,31 +152,7 @@ public class RelatorioView extends javax.swing.JFrame {
 
         pnlRelatorio.addTab("Relatório Analítico", pnlAnalitico);
 
-        lblDataInicial1.setText("Data inicial:");
-
-        lblDataFinal1.setText("Data final:");
-
-        try {
-            txtDataInicial1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtDataInicial1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataInicial1ActionPerformed(evt);
-            }
-        });
-
-        try {
-            txtDataInicial2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtDataInicial2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataInicial2ActionPerformed(evt);
-            }
-        });
+        lblDataFinal1.setText("ID Venda:");
 
         tblProduto1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,6 +165,11 @@ public class RelatorioView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblProduto1);
 
         jButton2.setText("Pesquisar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -199,32 +182,34 @@ public class RelatorioView extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDataInicial1)
-                            .addComponent(lblDataFinal1))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataInicial1)
-                            .addComponent(txtDataInicial2))
-                        .addGap(18, 18, 18)
+                        .addComponent(lblDataFinal1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(547, 547, 547))))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataInicial1)
-                    .addComponent(txtDataInicial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(75, 75, 75)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataFinal1)
-                    .addComponent(txtDataInicial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(txtIdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pnlRelatorio.addTab("Relatório Sintético", jPanel3);
@@ -252,38 +237,31 @@ public class RelatorioView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataInicialActionPerformed
 
-    private void txtDataInicial1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicial1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataInicial1ActionPerformed
-
-    private void txtDataInicial2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataInicial2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataInicial2ActionPerformed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (ValidarFormulario()) {
             //try {
-                ArrayList<String[]> linhasRelatorio = VendaController.relatorioVendas(txtDataInicial.getText(), txtDataFinal.getText());
+                String[] dI = txtDataInicial.getText().split("/");
+                String[] dF = txtDataFinal.getText().split("/");
+                String dataInicial = dI[2] + "-" + dI[1] + "-" + dI[0];
+                String dataFinal = dF[2] + "-" + dF[1] + "-" + dF[0];
+                ArrayList<String[]> linhasRelatorio = VendaController.buscarVendaPorDatas(dataInicial, dataFinal);
             
                 System.out.println(linhasRelatorio);
         
+                
                 DefaultTableModel tmRelatorio = new DefaultTableModel();
                 tmRelatorio.addColumn("ID");
-                tmRelatorio.addColumn("Nome");
-                tmRelatorio.addColumn("Quantidade");
-                tmRelatorio.addColumn("Valor");
-                tmRelatorio.addColumn("Descricao");
+                tmRelatorio.addColumn("ID Cliente");
+                tmRelatorio.addColumn("Nome Cliente");
+                tmRelatorio.addColumn("Data Compra");
+                tmRelatorio.addColumn("Data Atualizacao");
+                tmRelatorio.addColumn("Valor Total");
                 tblRelatorio.setModel(tmRelatorio);
 
                 for(String[] p:linhasRelatorio){
                     tmRelatorio.addRow(p);
                 }
             
-            //} catch (SQLException ex) {
-            //    Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (ClassNotFoundException ex) {
-            //    Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
-            //}
         } else {
             JOptionPane.showMessageDialog(this, "Preencha os campos de data para preencher o relatório!");
         }
@@ -304,6 +282,34 @@ public class RelatorioView extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtDataFinalKeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (ValidarFormulario2()) {
+            //try {
+                
+                ArrayList<String[]> linhasRelatorio = itemVendaController.buscarItens(Integer.parseInt((String) txtIdVenda.getText()));
+            
+                System.out.println(linhasRelatorio);
+        
+                
+                DefaultTableModel tmRelatorio = new DefaultTableModel();
+                tmRelatorio.addColumn("ID Item");
+                tmRelatorio.addColumn("ID Produto");
+                tmRelatorio.addColumn("Nome Produto");
+                tmRelatorio.addColumn("Quantidade");
+                tmRelatorio.addColumn("Preco Unitario");
+                tmRelatorio.addColumn("Preco Total");
+                tblProduto1.setModel(tmRelatorio);
+
+                for(String[] p:linhasRelatorio){
+                    tmRelatorio.addRow(p);
+                }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Preencha os campos de ID Venda para preencher o relatório!");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,6 +364,14 @@ public class RelatorioView extends javax.swing.JFrame {
         return true;
     }
     
+    private boolean ValidarFormulario2(){
+        if(this.txtIdVenda.getText().equalsIgnoreCase("") || this.txtDataFinal.getText().equalsIgnoreCase(""))
+            return false;
+        
+        
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton2;
@@ -367,14 +381,13 @@ public class RelatorioView extends javax.swing.JFrame {
     private javax.swing.JLabel lblDataFinal;
     private javax.swing.JLabel lblDataFinal1;
     private javax.swing.JLabel lblDataInicial;
-    private javax.swing.JLabel lblDataInicial1;
     private javax.swing.JPanel pnlAnalitico;
     private javax.swing.JTabbedPane pnlRelatorio;
     private javax.swing.JTable tblProduto1;
     private javax.swing.JTable tblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
-    private javax.swing.JFormattedTextField txtDataInicial1;
-    private javax.swing.JFormattedTextField txtDataInicial2;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdVenda;
     // End of variables declaration//GEN-END:variables
 }

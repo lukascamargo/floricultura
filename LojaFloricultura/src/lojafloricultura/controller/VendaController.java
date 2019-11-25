@@ -5,6 +5,7 @@
  */
 package lojafloricultura.controller;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import lojafloricultura.DAO.ClienteDAO;
 import lojafloricultura.DAO.VendaDAO;
 import lojafloricultura.model.Cliente;
@@ -38,14 +39,28 @@ public class VendaController {
         }
 
         try {
-            listaClientes = ClienteDAO.getClienteByCPF(cpf);
+            System.out.println("CPF: " + cpf);
+            listaClientes = ClienteDAO.getClienteByCPF(cpf.replace(".", "").replace("-", ""));
+            System.out.println(listaClientes);
+            
         } catch (SQLException ex) {
             Logger.getLogger(VendaController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        System.out.println(listaClientes);
+        
+        
         int size = listaClientes.size();
+        
+        System.out.println("Size: " + size);
+        
+        
+        Cliente cliente = new Cliente();
+        cliente = listaClientes.get(size - 1);
+        
+        System.out.println("Cliente: " + cliente);
 
-        return listaClientes.get(size - 1);
+        return cliente;
     }
 
     /**
@@ -108,6 +123,30 @@ public class VendaController {
         
         return listaVendas;
     }
+    
+    public static ArrayList<String[]> buscarVendaPorDatas(String dataInicial, String dataFinal){
+        System.out.println("Data Inicial" + dataInicial);
+        System.out.println("Data Final" + dataFinal);
+        ArrayList<Venda> listaVendas = VendaDAO.buscarVendaPorDatas(dataInicial, dataFinal);
+        ArrayList<String[]> resultado = new ArrayList<>();
+        
+        for(int i = 0; i < listaVendas.size(); i++){
+            resultado.add(new String[]{
+                String.valueOf(listaVendas.get(i).getCodigo()),
+                String.valueOf(listaVendas.get(i).getCliente()),
+                ClienteDAO.getClienteById(listaVendas.get(i).getCliente()).getNome(),
+                String.valueOf(listaVendas.get(i).getDataDaCompra()),
+                String.valueOf(listaVendas.get(i).getDataAtualizacao()),
+                String.valueOf(listaVendas.get(i).getValorTotal())
+            });
+        }
+        
+        return resultado;
+        
+    }
+    
+    
+    
     
       
 }

@@ -139,7 +139,7 @@ public class ClienteController {
     */
     public static ArrayList<String[]> getClienteByCPF(String CPF)throws SQLException, ClassNotFoundException{
         
-        ArrayList<Cliente> cliente = ClienteDAO.getClienteByCPF(CPF);
+        ArrayList<Cliente> cliente = ClienteDAO.getClienteByCPF(CPF.replace(".","").replace("-",""));
         ArrayList<String[]> clientePesquisado = new ArrayList<>();
         
         

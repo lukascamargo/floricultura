@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static lojafloricultura.DAO.ProdutoDAO.DRIVER;
 
 
 /**
@@ -245,29 +246,30 @@ public class ClienteDAO {
     */
     public static ArrayList<Cliente> getClienteByCPF(String cCPF) throws SQLException {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
-        Cliente c = new Cliente();
-        
-        Connection conexao = null;
-        Statement instrucaoSQL = null; 
-        ResultSet rs = null;
         
         
-        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);  
-        instrucaoSQL = conexao.createStatement();
-        
-        rs = instrucaoSQL.executeQuery("SELECT * FROM Clientes"
-            + " WHERE CPF = " + "'" + cCPF + "'");
-            
         try {
+            Class.forName(DRIVER);
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);  
+            Statement instrucaoSQL = conexao.createStatement();
+
+            ResultSet rs = instrucaoSQL.executeQuery("SELECT * FROM clientes WHERE CPF = "
+                    + "'" + cCPF + "'");
+
+            System.out.println("Result set" + rs);
+            
+        
             while(rs.next()){
-                c.setId(rs.getInt("ID"));
-                c.setNome(rs.getString("NOME"));
+                System.out.println(rs.getInt("id"));
+                Cliente c = new Cliente();
+                c.setId(rs.getInt("id"));
+                c.setNome(rs.getString("nome"));
                 c.setCPF(rs.getString("CPF"));
-                c.setEmail(rs.getString("EMAIL"));
-                c.setSexo(rs.getString("SEXO"));
-                c.setEndereco(rs.getString("ENDERECO"));
-                c.setNumero(rs.getString("NUMERO"));
-                c.setComplemento(rs.getString("COMPLEMENTO"));
+                c.setEmail(rs.getString("email"));
+                c.setSexo(rs.getString("sexo"));
+                c.setEndereco(rs.getString("endereco"));
+                c.setNumero(rs.getString("numero"));
+                c.setComplemento(rs.getString("complemento"));
                 c.setEstadoCivil(rs.getString("estadoCivil"));
                 c.setDataNasc(rs.getString("dataNasc"));
                 c.setTelefone(rs.getString("telefone"));
@@ -275,8 +277,18 @@ public class ClienteDAO {
             }
         
         } catch (SQLException ex){
-            c = null;
-        } 
+            System.out.println(ex);
+            listaClientes = null;
+        } catch (ClassNotFoundException ex) { 
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if(conexao != null)
+                    conexao.close();
+            } catch (SQLException ex){
+                return null;
+            }
+        }
         
         return listaClientes;
     }
@@ -370,27 +382,41 @@ public class ClienteDAO {
     */
     public static Cliente getClienteById(int cId) {
         Cliente c = new Cliente();
+              
+        Connection conexao = null;
+        Statement instrucaoSQL = null; 
+        ResultSet rs = null;
         
-        ResultSet rs = DatabaseConnection.executarQuery("SELECT * FROM Clientes"
-                + "WHERE ID = " + "'" + cId + "'");
-        try {
-            while(rs.next()){
-                c.setId(rs.getInt("ID"));
-                c.setNome(rs.getString("NOME"));
-                c.setCPF(rs.getString("CPF"));
-                c.setEmail(rs.getString("EMAIL"));
-                c.setSexo(rs.getString("SEXO"));
-                c.setEndereco(rs.getString("ENDERECO"));
-                c.setNumero(rs.getString("NUMERO"));
-                c.setComplemento(rs.getString("COMPLEMENTO"));
-                c.setEstadoCivil(rs.getString("estadoCivil"));
-                c.setDataNasc(rs.getString("dataNasc"));
-                c.setTelefone(rs.getString("telefone"));
-            }
         
-        } catch (SQLException ex){
-            c = null;
-        } 
+        try {  
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            
+            instrucaoSQL = conexao.createStatement();
+        
+            rs = instrucaoSQL.executeQuery("SELECT * FROM clientes"
+                + " WHERE id = " + cId);
+            try {
+                while(rs.next()){
+                    c.setId(rs.getInt("ID"));
+                    c.setNome(rs.getString("NOME"));
+                    c.setCPF(rs.getString("CPF"));
+                    c.setEmail(rs.getString("EMAIL"));
+                    c.setSexo(rs.getString("SEXO"));
+                    c.setEndereco(rs.getString("ENDERECO"));
+                    c.setNumero(rs.getString("NUMERO"));
+                    c.setComplemento(rs.getString("COMPLEMENTO"));
+                    c.setEstadoCivil(rs.getString("estadoCivil"));
+                    c.setDataNasc(rs.getString("dataNasc"));
+                    c.setTelefone(rs.getString("telefone"));
+                }
+
+            } catch (SQLException ex){
+                c = null;
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         return c;
     }
