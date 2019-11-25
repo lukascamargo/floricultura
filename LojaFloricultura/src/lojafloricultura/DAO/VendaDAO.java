@@ -7,13 +7,16 @@ package lojafloricultura.DAO;
 
 import lojafloricultura.model.Venda;
 import lojafloricultura.model.Cliente;
-import java.util.ArrayList;
 import java.util.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +24,11 @@ import java.util.Set;
  */
 public class VendaDAO {
     Cliente Cliente = null;
+    public static String DRIVER = "com.mysql.cj.jdbc.Driver";
+    public static String LOGIN = "root";
+    public static String SENHA = "root";
+    public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    private static Connection conexao = null;
         
     public static boolean salvar(Venda v){
         return DatabaseConnection.executarUpdate("");
@@ -29,6 +37,98 @@ public class VendaDAO {
     
     public static boolean atualizar(Venda v){
         return DatabaseConnection.executarUpdate("");
+    }
+    
+    
+    public static Venda criarVenda(Venda v){
+        Venda venda = new Venda();
+        
+        try {
+            Class.forName(DRIVER);
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            Statement comando = conexao.createStatement();
+            PreparedStatement pStmt = conexao.prepareStatement(
+                    "INSERT INTO vendas(clienteId, valorTotal, dataDaCompra, dataAtualizacao, desconto, pagamento) VALUES (?, ?, ?, ?, ?, ?)",
+                    PreparedStatement.RETURN_GENERATED_KEYS
+            );
+            pStmt.setInt(1, v.getCliente());
+            pStmt.setDouble(2, v.getValorTotal());
+            pStmt.setDate(3, new java.sql.Date(v.getDataDaCompra().getTime()));
+            pStmt.setDate(4, new java.sql.Date(v.getDataAtualizacao().getTime()));
+            pStmt.setInt(5, v.getDesconto());
+            pStmt.setString(6, v.getPagamento());
+            pStmt.executeUpdate();
+      
+            ResultSet rs = pStmt.getGeneratedKeys();
+            System.out.println("Result Set: " + rs);
+            
+            while(rs.next()){
+                System.out.println("Result Set Venda ID: " + rs.getLong(1));
+                venda = v;
+                venda.setCodigo(Integer.parseInt(String.valueOf(rs.getLong(1))));
+            }
+            
+        } catch (SQLException ex){
+            System.out.println("SQL Exception: " + ex);
+            venda = null;
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver não encontrado.");
+            venda = null;
+        } finally {
+            try {
+                if(conexao != null)
+                    conexao.close();
+            } catch (SQLException ex) {
+                System.out.println("SQL Exception: " + ex);
+            }
+        }
+        
+        return venda;
+    }
+    
+    public static boolean atualizarVenda(Venda v){
+        boolean retorno = false;
+        
+        try {
+            Class.forName(DRIVER);
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            Statement comando = conexao.createStatement();
+            PreparedStatement pStmt = conexao.prepareStatement(
+                    "UPDATE vendas SET clienteId=?, valorTotal=?, dataDaCompra=?, dataAtualizacao=?, desconto=?, pagamento=? WHERE id = ?"
+            );
+            pStmt.setInt(1, v.getCliente());
+            pStmt.setDouble(2, v.getValorTotal());
+            pStmt.setDate(3, new java.sql.Date(v.getDataDaCompra().getTime()));
+            pStmt.setDate(4, new java.sql.Date(v.getDataAtualizacao().getTime()));
+            pStmt.setInt(5, v.getDesconto());
+            pStmt.setString(6, v.getPagamento());
+            pStmt.setInt(7, v.getCodigo());
+            int linhasAfetadas = pStmt.executeUpdate();
+            
+            if(linhasAfetadas > 0){
+                retorno = true;
+            } else {
+                retorno = false;
+            }
+            
+        } catch(ClassNotFoundException ex){
+            System.out.println("Driver não encontrado.");
+            System.out.println(ex);
+            retorno = false;
+        } catch(SQLException ex){
+            System.out.println("Erro no comando SQL: " + ex);
+            System.out.println(ex);
+            retorno = false;
+        } finally {
+            try {
+                if(conexao != null)
+                    conexao.close();    
+            } catch (SQLException ex){
+                
+            }
+        }
+        
+        return retorno;
     }
     
     public static ArrayList<Venda> getVendas() {

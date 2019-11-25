@@ -13,15 +13,25 @@ public class ItemVenda {
     
     private int id;
     private int produtoId;
+    private int vendaId;
     private int quantidade;
     private double precoUnitario;
     private double precoTotal;
     
     public ItemVenda(){}
     
-    public ItemVenda(int iId, int pId, int iQuantidade, double iUnitario, double iTotal){
+    public ItemVenda(int pId, int vId, int iQuantidade, double iUnitario, double iTotal){
+        this.produtoId = pId;
+        this.vendaId = vId;
+        this.quantidade = iQuantidade;
+        this.precoUnitario = iUnitario;
+        this.precoTotal = iTotal;
+    }
+    
+    public ItemVenda(int iId, int pId, int vId, int iQuantidade, double iUnitario, double iTotal){
         this.id = iId;
         this.produtoId = pId;
+        this.vendaId = vId;
         this.quantidade = iQuantidade;
         this.precoUnitario = iUnitario;
         this.precoTotal = iTotal;
@@ -33,6 +43,10 @@ public class ItemVenda {
 
     public int getProdutoId() {
         return produtoId;
+    }
+    
+    public int getVendaId(){
+        return vendaId;
     }
 
     public int getQuantidade() {
@@ -53,6 +67,10 @@ public class ItemVenda {
 
     public void setProdutoId(int produtoId) {
         this.produtoId = produtoId;
+    }
+    
+    public void setVendaId(int vendaId){
+        this.vendaId = vendaId;
     }
 
     public void setQuantidade(int quantidade) {

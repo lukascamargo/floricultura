@@ -16,7 +16,7 @@ import java.util.Date;
 public class Venda {
     
     private int codigo;
-    private Cliente cliente;
+    private int cliente;
     private ArrayList<ItemVenda> produtos;
     private double valorTotal;
     private Date dataDaCompra;
@@ -44,7 +44,7 @@ public class Venda {
         return codigo;
     }
 
-    public Cliente getCliente() {
+    public int getCliente() {
         return cliente;
     }
 
@@ -68,7 +68,7 @@ public class Venda {
         this.codigo = codigo;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(int cliente) {
         this.cliente = cliente;
     }
 
@@ -90,7 +90,7 @@ public class Venda {
     
     public Venda(){}
     
-    public Venda(Cliente cliente, ArrayList<ItemVenda> produtos){
+    public Venda(int cliente, ArrayList<ItemVenda> produtos){
         this.cliente = cliente;
         this.produtos = produtos;
         
@@ -100,13 +100,13 @@ public class Venda {
     }
    
     
-    public Venda(Cliente cliente, ArrayList<ItemVenda> produtos, double valor){
+    public Venda(int cliente, ArrayList<ItemVenda> produtos, double valor){
         this.cliente = cliente;
         this.produtos = produtos;
         this.valorTotal = valor;
     }
     
-    public Venda(int codigo, Cliente cliente, ArrayList<ItemVenda> produtos, double valor){
+    public Venda(int codigo, int cliente, ArrayList<ItemVenda> produtos, double valor){
         this.codigo = codigo;
         this.cliente = cliente;
         this.produtos = produtos;

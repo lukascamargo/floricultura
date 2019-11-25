@@ -205,7 +205,7 @@ public class ProdutoDAO {
             Class.forName(DRIVER);
             conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
             Statement comando = conexao.createStatement();
-            ResultSet rs = comando.executeQuery("SELECT * FROM produtos"
+            ResultSet rs = comando.executeQuery("SELECT * FROM produtos "
                 + "WHERE id = " + id);
             while(rs.next()){
                 p.setId(rs.getInt("id"));
@@ -244,7 +244,7 @@ public class ProdutoDAO {
                 Produto p = new Produto();
                 p.setId(rs.getInt("id"));
                 p.setQuantidade(rs.getInt("quantidade"));
-                p.setValor(rs.getDouble("valor") + 50);
+                p.setValor(rs.getDouble("valor"));
                 p.setNome(rs.getString("nome"));
                 p.setDescricao(rs.getString("descricao"));
                 listaProdutos.add(p);
