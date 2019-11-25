@@ -62,6 +62,7 @@ public class VendaView extends javax.swing.JFrame {
         btnAdicionaProduto.setEnabled(false);
         btnPesquisaProduto.setEnabled(false);        
         btnCancelaProduto.setEnabled(false);
+        btnAdicionarAoCarrinho.setEnabled(false);
     }
     
     //Método auxiliar para habilitar formulario Cliente
@@ -88,6 +89,7 @@ public class VendaView extends javax.swing.JFrame {
         btnAdicionaProduto.setEnabled(true);
         btnPesquisaProduto.setEnabled(true);        
         btnCancelaProduto.setEnabled(true);
+        btnAdicionarAoCarrinho.setEnabled(true);
     }
     
     //Método auxiliar para limpar formulario Produto
@@ -143,7 +145,7 @@ public class VendaView extends javax.swing.JFrame {
         btnCancelaProduto = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
         txtValorProduto = new javax.swing.JTextField();
-        btnPesquisaProduto1 = new javax.swing.JButton();
+        btnAdicionarAoCarrinho = new javax.swing.JButton();
         txtBuscarProdutoPorNome = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -329,10 +331,10 @@ public class VendaView extends javax.swing.JFrame {
 
         lblNome1.setText("Nome:");
 
-        btnPesquisaProduto1.setText("Adicionar ao Carrinho");
-        btnPesquisaProduto1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionarAoCarrinho.setText("Adicionar ao Carrinho");
+        btnAdicionarAoCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaProduto1ActionPerformed(evt);
+                btnAdicionarAoCarrinhoActionPerformed(evt);
             }
         });
 
@@ -379,11 +381,12 @@ public class VendaView extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblNome1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNomeProduto))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnPesquisaProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtNomeProduto)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAdicionarAoCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,7 +414,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome1))
                 .addGap(18, 18, 18)
-                .addComponent(btnPesquisaProduto1)
+                .addComponent(btnAdicionarAoCarrinho)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -760,9 +763,11 @@ public class VendaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluiItemActionPerformed
 
-    private void btnPesquisaProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProduto1ActionPerformed
+    private void btnAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAoCarrinhoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisaProduto1ActionPerformed
+        
+        
+    }//GEN-LAST:event_btnAdicionarAoCarrinhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -802,6 +807,7 @@ public class VendaView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionaCliente;
     private javax.swing.JButton btnAdicionaProduto;
+    private javax.swing.JButton btnAdicionarAoCarrinho;
     private javax.swing.JButton btnAdicionarCliente;
     private javax.swing.JButton btnAdicionarProduto;
     private javax.swing.JButton btnCancelaCliente;
@@ -812,7 +818,6 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JButton btnFinaliza;
     private javax.swing.JButton btnPesquisaCliente;
     private javax.swing.JButton btnPesquisaProduto;
-    private javax.swing.JButton btnPesquisaProduto1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
