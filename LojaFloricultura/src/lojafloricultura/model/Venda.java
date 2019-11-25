@@ -300,7 +300,7 @@ public class Venda {
      * Contrutor da Classe, para realizar vendas
      * 
      * @author lukas.fialho, Italo
-     * @param codigo int - 
+     * @param codigo int - Id da Compra 
      * @param cliente int - Cliente 
      * @param produtos ItemVenda - Lista de Produtos no carrinho
      * @param valor double - Valor do Produto 
