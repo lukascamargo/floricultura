@@ -29,17 +29,47 @@ public class VendaDAO {
     public static String SENHA = "root";
     public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
-        
+    
+    /**
+     * 
+     * Este é o método que salva a Venda no banco de dados. 
+     * Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param v - Venda
+     * @return boolean - informa se salvou no banco ou não
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static boolean salvar(Venda v){
         return DatabaseConnection.executarUpdate("");
     }
     
-    
+    /**
+     * 
+     * Esste método deve ser utilizado para atualizar as informações de uma Venda 
+     * no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param v - Venda que será atualizada
+     * @return boolean - informação se o insert de dados foi realizado ou não
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean atualizar(Venda v){
         return DatabaseConnection.executarUpdate("");
     }
     
-    
+    /**
+     * 
+     * Esste método deve ser utilizado para criar uma Venda 
+     * 
+     * @author lukas.fialho
+     * @param v - Venda que será criada
+     * @return boolean
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static Venda criarVenda(Venda v){
         Venda venda = new Venda();
         
@@ -86,6 +116,17 @@ public class VendaDAO {
         return venda;
     }
     
+    /**
+     * 
+     * Esste método deve ser utilizado para atualizar as informações de uma Venda 
+     * no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param v - Venda que será atualizada
+     * @return boolean - informação se o insert de dados foi realizado ou não
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean atualizarVenda(Venda v){
         boolean retorno = false;
         
@@ -131,6 +172,16 @@ public class VendaDAO {
         return retorno;
     }
     
+    /**
+     * 
+     * Esste método deve ser utilizado para buscar as informações de uma Venda 
+     * 
+     * @author lukas.fialho
+     * 
+     * @return ArrayList
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static ArrayList<Venda> getVendas() {
         ArrayList<Venda> listaVendas = new ArrayList<>();
         
@@ -155,6 +206,16 @@ public class VendaDAO {
         return listaVendas;
     }
     
+    /**
+     * 
+     * Esste método deve ser utilizado para buscar as informações de uma Venda a partir do Id
+     * 
+     * @author lukas.fialho
+     * @param codigo int - ID da Venda
+     * @return ArrayList
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static Venda getVenda(int codigo) {
         Venda v = new Venda();
         

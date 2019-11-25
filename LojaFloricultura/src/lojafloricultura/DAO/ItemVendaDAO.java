@@ -6,7 +6,6 @@
 package lojafloricultura.DAO;
 
 import lojafloricultura.model.ItemVenda;
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +25,17 @@ public class ItemVendaDAO {
     public static String URL = "jdbc:mysql://localhost:3306/floricultura?useTimezone=true&serverTimezone=UTC&useSSL=false";
     private static Connection conexao = null;
     
+    /**
+     * 
+     * Este é o método que salva o Produto no banco de dados. 
+     * Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param i - ItemVenda
+     * @return ItemVenda 
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static ItemVenda salvar(ItemVenda i){
         ItemVenda item = new ItemVenda();
         
@@ -73,6 +83,16 @@ public class ItemVendaDAO {
         return item;
     }
     
+    /**
+     * 
+     * Este é o método que busca e retorna uma lista de Itens para Venda
+     * 
+     * @author lukas.fialho
+     * @param vendaId int - ID da Venda
+     * @return LIsta de ItemVenda 
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static ArrayList<ItemVenda> getItensPorVendaId(int vendaId){
         ArrayList<ItemVenda> listaItens = new ArrayList<>();
         
@@ -105,15 +125,24 @@ public class ItemVendaDAO {
             try {
                 if(conexao!=null)
                   conexao.close();
-              } catch (SQLException ex) {
-             }
+            } catch (SQLException ex) {
+                return null;
+            }
         }
-        
-        
         
         return listaItens;
     }
     
+    /**
+     * 
+     * Este é o método que busca e retorna uma lista de Itens para Venda
+     * 
+     * @author lukas.fialho
+     * @param iID int - ID do Item 
+     * @return boolean
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static boolean excluir(int iID){
         boolean retorno = false;
         Connection conexao = null;
@@ -132,8 +161,7 @@ public class ItemVendaDAO {
             if(linhasAfetadas>0)
             {
                 retorno = true;
-            }
-            else{
+            } else {
                 retorno = false;
             }
             
@@ -143,8 +171,7 @@ public class ItemVendaDAO {
         } catch (SQLException ex) {
             System.out.println("Erro no comando SQL.");
             retorno = false;
-        
-        }finally{
+        } finally {
             
             //Libero os recursos da memória
             try {
@@ -152,8 +179,9 @@ public class ItemVendaDAO {
                     instrucaoSQL.close();
                 if(conexao!=null)
                   conexao.close();
-              } catch (SQLException ex) {
-             }
+            } catch (SQLException ex) {
+                return false;
+            }
         }
         return retorno;
     }

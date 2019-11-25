@@ -349,14 +349,14 @@ public class ProdutoView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Falha ao ediar o Produto!");
             }            
         } else if(!editar && ValidarFormulario()) {
-            if(
+            if (
                     produtoController.salvar(
                             txtNomeProduto.getText(),
                             Integer.parseInt(txtQuantidadeProduto.getText()),
                             Double.parseDouble(txtValueProduto.getText()),
                             txtDescriptionProduto.getText()
                     )
-                    ){
+                ){
                 this.Recarregar();
                 JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
                 LimpaForm();
@@ -559,18 +559,16 @@ public class ProdutoView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Quantidade deve ser um numero maior que zero!!");
                 return false;
             }
-        
         } catch(NumberFormatException e){
             
             JOptionPane.showMessageDialog(this,"Quantidade deve ser um numero inteiro!!");
             return false;
-        
         }catch(IllegalArgumentException e){
             
             JOptionPane.showMessageDialog(this,"Digite um valor para Quantidade");  
             return false;
-        
         }
+        
         //Trata Valor
         try {
 
@@ -579,22 +577,17 @@ public class ProdutoView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Valor deve ser um numero maior que zero!!");
                 return false;
             }
-        
         } catch(NumberFormatException e){
             
             JOptionPane.showMessageDialog(this,"Valor deve ser um numero");
             return false;
-        
         } catch(IllegalArgumentException e){
             
             JOptionPane.showMessageDialog(this,"Digite um valor!");  
             return false;
-        
         }
         
-        
         return true;
-        
     }
     
     /**

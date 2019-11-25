@@ -6,7 +6,6 @@
 package lojafloricultura.DAO;
 
 import lojafloricultura.model.Produto;
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -69,7 +68,7 @@ public class ProdutoDAO {
                 if(conexao != null)
                     conexao.close();    
             } catch (SQLException ex){
-                
+                return false;
             }
         }
         
@@ -119,7 +118,7 @@ public class ProdutoDAO {
                 if(conexao != null)
                     conexao.close();    
             } catch (SQLException ex){
-                
+                return false;
             }
         }
         
@@ -179,8 +178,9 @@ public class ProdutoDAO {
             try {
                 if(conexao!=null)
                   conexao.close();
-              } catch (SQLException ex) {
-             }
+            } catch (SQLException ex) {
+                return null;
+            }
         }
         
         return listaProdutos;
@@ -259,8 +259,9 @@ public class ProdutoDAO {
             try {
                 if(conexao!=null)
                   conexao.close();
-              } catch (SQLException ex) {
-             }
+            } catch (SQLException ex) {
+                return null;
+            }
         }
         
         return listaProdutos;
