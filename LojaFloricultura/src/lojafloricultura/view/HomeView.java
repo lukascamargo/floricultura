@@ -136,21 +136,61 @@ public class HomeView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento do botão, redirecionando para Vendas
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
         VendaView v = new VendaView();
         v.setVisible(true);
     }//GEN-LAST:event_btnVendaActionPerformed
 
+    /**
+     * 
+     * Evento do botão, redirecionando para Clientes
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         ClienteView c = new ClienteView();
         c.setVisible(true);
     }//GEN-LAST:event_btnClienteActionPerformed
 
+    /**
+     * 
+     * Evento do botão, redirecionando para Produtos
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         ProdutoView p = new ProdutoView();
         p.setVisible(true);
     }//GEN-LAST:event_btnProdutoActionPerformed
 
+    /**
+     * 
+     * Evento do botão, redirecionando para Relatórios
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
         RelatorioView r = new RelatorioView();
         r.setVisible(true);

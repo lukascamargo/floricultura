@@ -677,7 +677,7 @@ public class ClienteView extends javax.swing.JFrame {
             Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchClietneActionPerformed
-
+ 
     /**
      * 
      * Método para editar as informações de um Cliente
