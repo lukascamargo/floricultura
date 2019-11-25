@@ -29,7 +29,17 @@ public class ClienteDAO {
     private static Connection conexao = null;
     
     
-    
+    /**
+     * 
+     * Este é o método que salva o Cliente no banco de dados. Caso tenha qualquer 
+     * alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param c - Cliente
+     * @return boolean - informa se salvou no banco ou não
+     * @version 1.0
+     * @since 18 de Novembro (data do Javadoc)
+    */
     public static boolean salvar(Cliente c){
         boolean retorno = false;
         
@@ -69,6 +79,18 @@ public class ClienteDAO {
         return true;
     }
     
+    /**
+     * 
+     * Esste método deve ser utilizado para atualizar as informações de Cliente
+     * no banco de dados. Caso tenha qualquer alteração no model, 
+     * é necessário refletir nesta <b>classe</b>
+     * 
+     * @author lukas.fialho
+     * @param c - Cliente que será atualizado
+     * @return boolean - informação se o insert de dados foi realizado ou não
+     * @version 1.0
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean atualizar(Cliente c){
         return DatabaseConnection.executarUpdate("UPDATE Clientes SET"
                 + "NOME = " + "'" + c.getNome() + "'" + ","
@@ -84,6 +106,16 @@ public class ClienteDAO {
                 + "WHERE ID = " + c.getId());
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para deletar algum Cliente do banco de dados.
+     * 
+     * @author lukas.fialho
+     * @param cID - Cliente ID
+     * @return boolean - Informação se o delete foi realizado ou não
+     * @version 1.0.
+     * @since 18 de Novembro (Data do Javadoc)
+    */
     public static boolean excluir(int cID){
         boolean retorno = false;
         Connection conexao = null;
@@ -128,7 +160,15 @@ public class ClienteDAO {
         return retorno;
     }
 
-    
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar todos os Clientes cadastrados na base
+     * 
+     * @author lukas.fialho
+     * @return ArrayList
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public static ArrayList<Cliente> getClientes() {
         Connection conexao = null;
         Statement instrucaoSQL = null; 
@@ -168,6 +208,17 @@ public class ClienteDAO {
         return listaClientes;
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar o Cliente cadastrado que possui um CPF específico.
+     * 
+     * @author lukas.fialho
+     * @param cCPF - CPF do Cliente
+     * @return ArrayList<Cliente> 
+     * @version 1.0
+     * @throws SQLException - Se existir alguma exceção de SQL
+     * @since 18 de Novembro(Javadoc)
+    */
     public static ArrayList<Cliente> getClienteByCPF(String cCPF) throws SQLException {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         Cliente c = new Cliente();
@@ -177,10 +228,12 @@ public class ClienteDAO {
         ResultSet rs = null;
         
         
-            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);  
-            instrucaoSQL = conexao.createStatement();
-            rs = instrucaoSQL.executeQuery("SELECT * FROM Clientes"
-                + " WHERE CPF = " + "'" + cCPF + "'");
+        conexao = DriverManager.getConnection(URL, LOGIN, SENHA);  
+        instrucaoSQL = conexao.createStatement();
+        
+        rs = instrucaoSQL.executeQuery("SELECT * FROM Clientes"
+            + " WHERE CPF = " + "'" + cCPF + "'");
+            
         try {
             while(rs.next()){
                 c.setId(rs.getInt("ID"));
@@ -204,6 +257,17 @@ public class ClienteDAO {
         return listaClientes;
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar o Cliente cadastrado que possui um CPF 
+     * específico, para preencher as informações do carrinho
+     * 
+     * @author lukas.fialho
+     * @param cCPF - CPF do Cliente
+     * @return Cliente
+     * @version 1.0
+     * @since 18 de Novembro(Javadoc)
+    */
     public static Cliente getClienteByCpfForBuy(String cCPF) {
         Cliente c = new Cliente();
         
@@ -231,6 +295,17 @@ public class ClienteDAO {
         return c;
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar o Cliente cadastrado que possui um nome 
+     * específico, para preencher as informações do carrinho
+     * 
+     * @author lukas.fialho
+     * @param cNome - CPF do Cliente
+     * @return Cliente
+     * @version 1.0
+     * @since 18 de Novembro(Javadoc)
+    */
     public static Cliente getClienteByNome(String cNome) {
         Cliente c = new Cliente();
         
@@ -258,6 +333,17 @@ public class ClienteDAO {
         return c;
     }
     
+    /**
+     * 
+     * Esse método deve ser utilizado para buscar o Cliente cadastrado que possui um ID 
+     * específico, para preencher as informações do carrinho
+     * 
+     * @author lukas.fialho
+     * @param cId - ID do Cliente
+     * @return Cliente
+     * @version 1.0
+     * @since 18 de Novembro(Javadoc)
+    */
     public static Cliente getClienteById(int cId) {
         Cliente c = new Cliente();
         

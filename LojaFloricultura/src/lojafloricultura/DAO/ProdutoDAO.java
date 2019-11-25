@@ -26,7 +26,10 @@ public class ProdutoDAO {
    
         
     /**
-     * Este é o método que salva o Produto no banco de dados. Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
+     * Este é o método que salva o Produto no banco de dados. 
+     * Caso tenha qualquer alteração no model, é necessário refletir nesta <b>classe</b>
+     * 
      * @author lukas.fialho
      * @param p - Produto
      * @return boolean - informa se salvou no banco ou não
@@ -124,7 +127,9 @@ public class ProdutoDAO {
     }
     
     /**
+     * 
      * Esse método deve ser utilizado para deletar algum produto do banco de dados.
+     * 
      * @author lukas.fialho
      * @param pID - Produto ID
      * @return boolean - Informação se o delete foi realizado ou não

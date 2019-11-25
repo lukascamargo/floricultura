@@ -6,15 +6,12 @@
 package lojafloricultura.view;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 import lojafloricultura.controller.ClienteController;
-import lojafloricultura.model.Cliente;
 
 /**
  *
@@ -33,7 +30,14 @@ public class ClienteView extends javax.swing.JFrame {
         LoadTable();
     }
     
-    //Método auxiliar para desabilitar formulario Produto
+    /**
+     * 
+     * Método auxiliar para desabilitar formulario
+     * 
+     * @author lukas.fialho, Italo
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void DesabilitaFormulario()
     {
         txtNomeCliente.setEditable(false);
@@ -52,7 +56,14 @@ public class ClienteView extends javax.swing.JFrame {
         btnCancel.setEnabled(false);
     }
     
-    //Método auxiliar para habilitar formulario Cliente
+    /**
+     * 
+     * Método auxiliar para habilitar formulario
+     * 
+     * @author lukas.fialho, Italo
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void HabilitaFormulario()
     {
         txtNomeCliente.setEditable(true);
@@ -71,7 +82,14 @@ public class ClienteView extends javax.swing.JFrame {
         btnCancel.setEnabled(true);
     }
     
-    //Método auxiliar para limpar formulario
+    /**
+     * 
+     * Método auxiliar para limpar formulario
+     * 
+     * @author lukas.fialho, Italo
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void LimpaFormulario()
     {
         txtNomeCliente.setText("");
@@ -87,6 +105,14 @@ public class ClienteView extends javax.swing.JFrame {
         txtTelefone.setText("");
     }
     
+    /**
+     * 
+     * Método para buscar e preencher tabela de Clientes
+     * 
+     * @author lukas.fialho, Italo
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void LoadTable(){
         
         ArrayList<String[]> linhasClientes = ClienteController.getClientes();
@@ -110,15 +136,15 @@ public class ClienteView extends javax.swing.JFrame {
        // tblClientes.removeColumn(tblClientes.getColumnModel().getColumn(0));
         
       
-       
-            for(String[] p:linhasClientes){
+        for(String[] p:linhasClientes){
             tmClientes.addRow(p);
         }
-        
-        
        
         tblClientes.getColumnModel().getColumn(0).setPreferredWidth(300);
         tblClientes.getColumnModel().getColumn(1).setPreferredWidth(100);
+        
+        LimpaFormulario();
+        DesabilitaFormulario();
     }
 
     /**
@@ -150,7 +176,7 @@ public class ClienteView extends javax.swing.JFrame {
         lblEstadoCivil = new javax.swing.JLabel();
         lblDataNasc = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
-        cboEstadoCivil = new javax.swing.JComboBox<String>();
+        cboEstadoCivil = new javax.swing.JComboBox<>();
         txtTelefone = new javax.swing.JFormattedTextField();
         txtDataNasc = new javax.swing.JFormattedTextField();
         lblID = new javax.swing.JLabel();
@@ -163,8 +189,8 @@ public class ClienteView extends javax.swing.JFrame {
         btnDeleteCliente = new javax.swing.JButton();
         pnlCliente1 = new javax.swing.JPanel();
         lblNome1 = new javax.swing.JLabel();
-        txtNomeCliente1 = new javax.swing.JTextField();
-        btnSave1 = new javax.swing.JButton();
+        btnSearchClietne = new javax.swing.JButton();
+        txtCpfSearchCliente = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -185,6 +211,11 @@ public class ClienteView extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCpfCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfClienteKeyTyped(evt);
+            }
+        });
 
         btnSave.setText("Salvar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -218,23 +249,33 @@ public class ClienteView extends javax.swing.JFrame {
 
         lblEstadoCivil.setText("Estado Civil");
 
-        lblDataNasc.setText("Data de nascimento*");
+        lblDataNasc.setText("Data de Nascimento *");
 
         lblTelefone.setText(" Telefone *");
 
-        cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Solteiro", "Casado", "Separado", "Divorciado", "Viúvo" }));
+        cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Separado", "Divorciado", "Viúvo" }));
 
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyTyped(evt);
+            }
+        });
 
         try {
             txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDataNasc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataNascKeyTyped(evt);
+            }
+        });
 
         lblID.setText("lblID");
 
@@ -280,7 +321,7 @@ public class ClienteView extends javax.swing.JFrame {
                             .addComponent(txtNomeCliente)
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCpfCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                         .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelefone, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblDataNasc, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -404,16 +445,26 @@ public class ClienteView extends javax.swing.JFrame {
 
         lblNome1.setText("CPF:");
 
-        txtNomeCliente1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchClietne.setText("Buscar");
+        btnSearchClietne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeCliente1ActionPerformed(evt);
+                btnSearchClietneActionPerformed(evt);
+            }
+        });
+        btnSearchClietne.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnSearchClietneKeyTyped(evt);
             }
         });
 
-        btnSave1.setText("Buscar");
-        btnSave1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave1ActionPerformed(evt);
+        try {
+            txtCpfSearchCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCpfSearchCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfSearchClienteKeyTyped(evt);
             }
         });
 
@@ -424,10 +475,10 @@ public class ClienteView extends javax.swing.JFrame {
             .addGroup(pnlCliente1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(lblNome1)
-                .addGap(18, 18, 18)
-                .addComponent(txtNomeCliente1)
-                .addGap(18, 18, 18)
-                .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCpfSearchCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearchClietne, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
         pnlCliente1Layout.setVerticalGroup(
@@ -436,8 +487,8 @@ public class ClienteView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome1)
-                    .addComponent(txtNomeCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnSearchClietne, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtCpfSearchCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -448,7 +499,7 @@ public class ClienteView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
                     .addComponent(pnlCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -482,6 +533,16 @@ public class ClienteView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Essa funcao deleta o Cliente selecionado na tabela
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento de Delete
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnDeleteClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteClienteActionPerformed
         if(tblClientes.getRowCount()>0)
         {
@@ -510,6 +571,16 @@ public class ClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
 
+    /**
+     * 
+     * M[etodo para salvar as informações de um novo Cliente
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if(ClienteController.salvar(txtNomeCliente.getText(), txtCpfCliente.getText().replace("-", "").replace(".", ""), 
                 txtEmail.getText(), txtEndereco.getText(), txtNumero.getText(), 
@@ -532,33 +603,99 @@ public class ClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeClienteActionPerformed
 
+    /**
+     * 
+     * Botão para adicionar um novo Cliente
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnNewClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewClienteActionPerformed
+        // Habilita e Limpa o formulário de Cliente
         HabilitaFormulario();
+        LimpaFormulario();
     }//GEN-LAST:event_btnNewClienteActionPerformed
 
+    /**
+     * 
+     * Botão para cancelar a inserção de um novo Cliente
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // Desabilita e Limpa o formulário de Cliente
         DesabilitaFormulario();
+        LimpaFormulario();
     }//GEN-LAST:event_btnCancelActionPerformed
+    
+    /**
+     * 
+     * Botão para pesquisar um Cliente por CPF
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private void btnSearchClietneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchClietneActionPerformed
+        try {
+            if (!this.txtCpfSearchCliente.getText().equalsIgnoreCase("")) {
+                if (this.txtCpfCliente.getText().length() < 11) {
+                    JOptionPane.showMessageDialog(this, "Digite um CPF válido!");
+                } else {
+                    ArrayList<String[]> clientes = ClienteController.getClienteByCPF(txtCpfSearchCliente.getText());
+            
+                    DefaultTableModel tmProdutos = new DefaultTableModel();
+                    tmProdutos.addColumn("ID");
+                    tmProdutos.addColumn("Nome");
+                    tmProdutos.addColumn("CPF");
+                    tmProdutos.addColumn("Email");
+                    tmProdutos.addColumn("Endereço");
+                    tmProdutos.addColumn("Número");
+                    tmProdutos.addColumn("Complemento");
+                    tmProdutos.addColumn("Sexo");
+                    tmProdutos.addColumn("Estado Civil");
+                    tmProdutos.addColumn("Data de Nascimento");
+                    tmProdutos.addColumn("Telefone");
 
-    private void txtNomeCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeCliente1ActionPerformed
+                    tblClientes.setModel(tmProdutos);
 
-    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave1ActionPerformed
+                    for(String[] p:clientes){
+                        tmProdutos.addRow(p);
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchClietneActionPerformed
 
+    /**
+     * 
+     * Método para editar as informações de um Cliente
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnEditClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditClienteActionPerformed
-             if(tblClientes.getRowCount()>0)
+        if(tblClientes.getRowCount()>0)
         {
             //Verifico se o usuário selecionou alguma linha (Primeira linha = 0)
             if(tblClientes.getSelectedRow()>=0)
             {
                 HabilitaFormulario();
                 
-                //Variável acessória para identifcar se o formulário está em modo de edição ou alteração
-                //modoTela = "Editar";
-
                 //Atribuo os valores que estão na linha selecionada para a tabela
                 lblID.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 0).toString());
                 txtNomeCliente.setText(tblClientes.getModel().getValueAt(tblClientes.getSelectedRow(), 1).toString());
@@ -572,14 +709,94 @@ public class ClienteView extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(this,"Selecione um carro para editar!");
+                JOptionPane.showMessageDialog(this,"Selecione um cliente para editar!");
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(this,"Não há carros para editar!");
+            JOptionPane.showMessageDialog(this,"Não há clientes para editar!");
         }
     }//GEN-LAST:event_btnEditClienteActionPerformed
+
+    /**
+     * 
+     * Evento KeyTyped para o campo CPF
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private void txtCpfClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfClienteKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfClienteKeyTyped
+
+    /**
+     * 
+     * Evento KeyTyped para o campo Data de Nascimento
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private void txtDataNascKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDataNascKeyTyped
+
+    /**
+     * 
+     * Evento KeyTyped para o campo Telefone
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private void txtTelefoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefoneKeyTyped
+
+    private void txtCpfSearchClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfSearchClienteKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCpfSearchClienteKeyTyped
+    
+    /**
+     * 
+     * Evento KeyTyped para o campo CPF para buscar clientes
+     * 
+     * @author lukas.fialho, Italo
+     * @param evt - Evento do Botão
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private void btnSearchClietneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSearchClietneKeyTyped
+        String numeros = "0123456789";
+        
+        if(!numeros.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_btnSearchClietneKeyTyped
 
     /**
      * @param args the command line arguments
@@ -615,7 +832,56 @@ public class ClienteView extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    /**
+     * 
+     * Essa funcao valida cada um dos campos do formulario quando o evento Salvar é ativado
+     * 
+     * @author lukas.fialho, Italo
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    private boolean ValidarFormulario() {
+        //Nome obrigatório
+        if(this.txtNomeCliente.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Digite um nome para o Cliente!");
+            return false;
+        }
+        
+        //CPF obrigatório
+        if(this.txtCpfCliente.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Campo CPF obrigatório para clientes!");
+            return false;
+        }
+        
+        //CPF válido com 11 digítos
+        if(this.txtCpfCliente.getText().length() < 11){
+            JOptionPane.showMessageDialog(this, "Digite um CPF válido!");
+            return false;
+        }
+        
+        //Endereço e Número obrigatórios 
+        if(this.txtEndereco.getText().equalsIgnoreCase("") || this.txtNumero.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(this, "Campo endereço e número obrigatórios para cliente!");
+            return false;
+        }
+        
+        //Data de Nasmineto obrigatório
+        if(this.txtDataNasc.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(this, "Campo endereço e número obrigatórios para cliente!");
+            return false;
+        }
+        
+        //Telefone obrigatório
+        if(this.txtTelefone.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(this, "Campo endereço e número obrigatórios para cliente!");
+            return false;
+        }
+        
+        return true;
+    }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgSexo;
     private javax.swing.JButton btnCancel;
@@ -623,7 +889,7 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditCliente;
     private javax.swing.JButton btnNewCliente;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSave1;
+    private javax.swing.JButton btnSearchClietne;
     private javax.swing.JComboBox<String> cboEstadoCivil;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
@@ -645,11 +911,11 @@ public class ClienteView extends javax.swing.JFrame {
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtComplemento;
     private javax.swing.JFormattedTextField txtCpfCliente;
+    private javax.swing.JFormattedTextField txtCpfSearchCliente;
     private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNomeCliente;
-    private javax.swing.JTextField txtNomeCliente1;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
