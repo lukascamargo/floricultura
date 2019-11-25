@@ -45,7 +45,15 @@ public class VendaView extends javax.swing.JFrame {
         DesabilitaFormularioProduto();
     }
     
-    //Método auxiliar para desabilitar formulario Cliente
+    /**
+     * 
+     * Método para desabilitar formulário de clientes.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void DesabilitaFormularioCliente()
     {
         txtIdCliente.setEditable(false);
@@ -57,7 +65,15 @@ public class VendaView extends javax.swing.JFrame {
 
     }
     
-    //Método auxiliar para desabilitar formulario Produto
+    /**
+     * 
+     * Método para desabilitar formulário de produtos.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void DesabilitaFormularioProduto()
     {
         txtIdProduto.setEditable(false);
@@ -72,7 +88,15 @@ public class VendaView extends javax.swing.JFrame {
         btnAdicionarAoCarrinho.setEnabled(false);
     }
     
-    //Método auxiliar para habilitar formulario Cliente
+   /**
+     * 
+     * Método para habilitar formulário de clientes e permitir inserção de dados.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void HabilitaFormularioCliente()
     {
         txtIdCliente.setEditable(true);
@@ -82,7 +106,15 @@ public class VendaView extends javax.swing.JFrame {
         btnPesquisaCliente.setEnabled(true);        
     }
     
-    //Método auxiliar para habilitar formulario Produto
+    /**
+     * 
+     * Método para habilitar formulário de clientes e permitir inserção de dados.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void HabilitaFormularioProduto()
     {
         txtIdProduto.setEditable(false);
@@ -97,7 +129,15 @@ public class VendaView extends javax.swing.JFrame {
         btnAdicionarAoCarrinho.setEnabled(true);
     }
     
-    //Método auxiliar para limpar formulario Produto
+    /**
+     * 
+     * Método para limpar formulário de produtos e limpar dados já colocados.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void LimpaFormularioProduto()
     {
         txtIdProduto.setText("");
@@ -115,7 +155,15 @@ public class VendaView extends javax.swing.JFrame {
         tblProdutos.setModel(tmProdutos);
     }
     
-    //Método auxiliar para limpar formulario Cliente
+    /**
+     * 
+     *Método para limpar formulário de clientes e limpar dados já colocados.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void LimpaFormularioCliente()
     {
         txtIdCliente.setText("");
@@ -569,23 +617,63 @@ public class VendaView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * 
+     * O modo de tela usado para adicionar cliente
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnAdicionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarClienteActionPerformed
         HabilitaFormularioCliente();
         LimpaFormularioCliente();
         DesabilitaFormularioProduto();
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed
 
+    /**
+     * 
+     * O modo de tela usado para adicionar produtos
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
         HabilitaFormularioProduto();
         LimpaFormularioProduto();
         DesabilitaFormularioCliente();
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
+    /**
+     * 
+     * Método que cancela a operação, desabilita e limpa os formulários.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    
     private void btnCancelaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaProdutoActionPerformed
         DesabilitaFormularioProduto();
         LimpaFormularioProduto();
     }//GEN-LAST:event_btnCancelaProdutoActionPerformed
 
+    
+   /**
+     * 
+     * Método para adição de produto, onde se puxam os dados do produto para inserção dele no carrinho
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnAdicionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaProdutoActionPerformed
         
         if(tblProdutos.getSelectedRow() == -1){
@@ -601,6 +689,16 @@ public class VendaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAdicionaProdutoActionPerformed
 
+    
+    /**
+     * 
+     * Método para pesquisa de produtos, onde se usa um método de carregar tabela.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaProdutoActionPerformed
         try {
             //Instancio um novo cliente
@@ -659,6 +757,15 @@ public class VendaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisaProdutoActionPerformed
 
+    /**
+     * 
+     * Método para exclusão de produtos com jTable
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnExcluiItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluiItemActionPerformed
         if(tblCarrinho.getRowCount() > 0)
         {
@@ -678,6 +785,15 @@ public class VendaView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluiItemActionPerformed
 
+    /**
+     * 
+     * Método para adição de produtos ao carrinho e mudança de modo de tela.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarAoCarrinhoActionPerformed
         try {
             // TODO add your handling code here:
@@ -702,12 +818,32 @@ public class VendaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAdicionarAoCarrinhoActionPerformed
 
+    
+    /**
+     * 
+     * Método de validação que impede valores incorretos
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void txtIdClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdClienteKeyReleased
         if (!txtIdCliente.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo só aceita números inteiros!");
         }
     }//GEN-LAST:event_txtIdClienteKeyReleased
 
+    
+    /**
+     * 
+     * Método para pesquisa e inserção do cliente na venda
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
         
         if(ValidarPesquisaCliente()){
@@ -727,6 +863,16 @@ public class VendaView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
+    
+    /**
+     * 
+     * Método que impede que o campo esteja vazio
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public boolean ValidarPesquisaCliente(){
         if(this.txtCPFCliente.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"Ops, parece que esqueceu de digitar um CPF!");
@@ -735,6 +881,16 @@ public class VendaView extends javax.swing.JFrame {
         return true;
     }
     
+    
+    /**
+     * 
+     * Término da compra, com a inserção de todos os dados que serão posteriormente tratados
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void btnFinalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizaActionPerformed
         // TODO add your handling code here:
         if(ValidarFormulario()){
@@ -762,7 +918,17 @@ public class VendaView extends javax.swing.JFrame {
         
          
     }//GEN-LAST:event_btnFinalizaActionPerformed
-
+        
+    /**
+     * 
+     * Os dados anteriores são retirados da memória e se fecha a tela
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    
     private void btnCancelaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaCompraActionPerformed
         // TODO add your handling code here:
         
@@ -770,6 +936,15 @@ public class VendaView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelaCompraActionPerformed
 
+   /**
+     * 
+     * Método que garante que não se digitem caracteres inválidos 
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private void txtCPFClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFClienteKeyTyped
         String numeros = "0123456789";
 
@@ -777,7 +952,15 @@ public class VendaView extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtCPFClienteKeyTyped
-
+/**
+     * 
+     * Método comum de validação
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     private boolean ValidarFormulario() {
         if(this.txtIdCliente.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this,"Não há cliente selecionado!");
@@ -818,6 +1001,16 @@ public class VendaView extends javax.swing.JFrame {
         return true;       
     }
     
+    /**
+     * 
+     * Método recuperar os produtos adicionados em uma tabela.  
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
+    
     public void buscarItensCarrinho(){
         DefaultTableModel tmCarrinho = new DefaultTableModel();
         tmCarrinho.addColumn("Item ID"); //ID
@@ -836,6 +1029,16 @@ public class VendaView extends javax.swing.JFrame {
         
     }
     
+    
+    /**
+     * 
+     * Método para adição de produto, onde se puxam os dados do produto para inserção dele no carrinho
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public void adicionarItemCarrinhoDeCompras(ItemVenda itemVendaNovo) throws SQLException, ClassNotFoundException{
         ArrayList<ItemVenda> backUpItens = backUpCarrinhoDeCompras();
         ArrayList<ItemVenda> novaLista = backUpCarrinhoDeCompras();
@@ -863,6 +1066,16 @@ public class VendaView extends javax.swing.JFrame {
                 
     }
     
+    
+    /**
+     * 
+     * Método para guardar dados dos produtos do carrinho de compras.
+     * 
+     * @author felipe.fhenriques
+     * @return void
+     * @version 1.0
+     * @since 18 de Novembro (Javadoc)
+    */
     public ArrayList<ItemVenda> backUpCarrinhoDeCompras(){
         ArrayList<ItemVenda> itensVenda = new ArrayList<>();
         
