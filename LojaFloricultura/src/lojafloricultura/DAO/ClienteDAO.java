@@ -73,7 +73,7 @@ public class ClienteDAO {
                 if(conexao != null)
                     conexao.close();    
             } catch (SQLException ex){
-                
+                return false;
             }
         }
         return true;
@@ -92,7 +92,15 @@ public class ClienteDAO {
      * @since 18 de Novembro (Data do Javadoc)
     */
     public static boolean atualizar(Cliente c){
-        return DatabaseConnection.executarUpdate("UPDATE Clientes SET"
+        boolean retorno = false;
+        
+        try {
+            Class.forName(DRIVER);
+            
+            conexao = DriverManager.getConnection(URL, LOGIN, SENHA);
+            Statement comando = conexao.createStatement();
+        
+        int linhasAfetadas = comando.executeUpdate("UPDATE Clientes SET"
                 + "NOME = " + "'" + c.getNome() + "'" + ","
                 + "CPF = " + "'" + c.getCPF()+ "'" + ","
                 + "EMAIL = " + "'" + c.getEmail() + "'" + ","
@@ -104,6 +112,23 @@ public class ClienteDAO {
                 + "DATANASC = " + "'" +c.getDataNasc() + "'" +","
                 + "TELEFONE = " + "'" + c.getTelefone() + "'"
                 + "WHERE ID = " + c.getId());
+        } catch(ClassNotFoundException ex){
+            System.out.println("Driver não encontrado.");
+            System.out.println(ex);
+            retorno = false;
+        } catch(SQLException ex){
+            System.out.println("Erro no comando SQL: " + ex);
+            System.out.println(ex);
+            retorno = false;
+        } finally {
+            try {
+                if(conexao != null)
+                    conexao.close();    
+            } catch (SQLException ex){
+                return false;
+            }
+        }
+        return true;
     }
     
     /**
@@ -174,7 +199,6 @@ public class ClienteDAO {
         Statement instrucaoSQL = null; 
         ResultSet rs = null;
         ArrayList<Cliente> listaClientes = new ArrayList<>();
-        
        
         try {
             
