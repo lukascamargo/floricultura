@@ -111,7 +111,7 @@ public class ProdutoView extends javax.swing.JFrame {
         pnlCliente1 = new javax.swing.JPanel();
         lblNome1 = new javax.swing.JLabel();
         txtPesquisarNome = new javax.swing.JTextField();
-        btnSave1 = new javax.swing.JButton();
+        btnSearchProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -247,10 +247,10 @@ public class ProdutoView extends javax.swing.JFrame {
             }
         });
 
-        btnSave1.setText("Buscar");
-        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchProduto.setText("Buscar");
+        btnSearchProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave1ActionPerformed(evt);
+                btnSearchProdutoActionPerformed(evt);
             }
         });
 
@@ -264,7 +264,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtPesquisarNome)
                 .addGap(18, 18, 18)
-                .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSearchProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
         pnlCliente1Layout.setVerticalGroup(
@@ -274,7 +274,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(pnlCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome1)
                     .addComponent(txtPesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnSearchProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -332,7 +332,6 @@ public class ProdutoView extends javax.swing.JFrame {
      * @since 18 de Novembro (Javadoc)
     */
     private void btnSaveProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProdutoActionPerformed
-        // TODO add your handling code here:
         if(editar && ValidarFormulario()){
             if(
                     produtoController.atualizar(
@@ -400,7 +399,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     /**
      * 
-     * Por mais que o nome da funcao esteja errado, esta funcao faz a pesquisa do Produto com base no nome do mesmo
+     * Esta função faz a pesquisa do Produto com base no nome preenchdio no campo.
      * 
      * @author lukas.fialho, Italo
      * @param evt - Evento do Botão
@@ -408,7 +407,7 @@ public class ProdutoView extends javax.swing.JFrame {
      * @version 1.0
      * @since 18 de Novembro (Javadoc)
     */
-    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+    private void btnSearchProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProdutoActionPerformed
         try {
             // TODO add your handling code here:
             ArrayList<String[]> linhasProdutos = produtoController.getProdutoByName(txtPesquisarNome.getText());
@@ -431,7 +430,7 @@ public class ProdutoView extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnSave1ActionPerformed
+    }//GEN-LAST:event_btnSearchProdutoActionPerformed
 
     /**
      * Quando clicado no botão Editar, esta função busca qual é a linha que estava selecionada (erro se nenhuma selecionada) e envia para o formulario de edição
@@ -443,7 +442,6 @@ public class ProdutoView extends javax.swing.JFrame {
      * @since 18 de Novembro (Javadoc)
     */
     private void btnEditProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProdutoActionPerformed
-        // TODO add your handling code here:
         if(TabelaProdutos.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Selecione um item para editar!");
         } else {
@@ -468,7 +466,6 @@ public class ProdutoView extends javax.swing.JFrame {
      * @since 18 de Novembro (Javadoc)
     */
     private void btnNewProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProdutoActionPerformed
-        // TODO add your handling code here:
         editar = false;
         btnSaveProduto.setVisible(true);
         FuncaoFormulario(true);
@@ -478,7 +475,7 @@ public class ProdutoView extends javax.swing.JFrame {
 
     /**
      * 
-     * Essa funcao deleta o Produto que estava selecionado na tabela
+     * Essa funcao deleta o Produto selecionado na tabela
      * 
      * @author lukas.fialho, Italo
      * @param evt - Evento de Delete
@@ -641,8 +638,8 @@ public class ProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteProduto;
     private javax.swing.JButton btnEditProduto;
     private javax.swing.JButton btnNewProduto;
-    private javax.swing.JButton btnSave1;
     private javax.swing.JButton btnSaveProduto;
+    private javax.swing.JButton btnSearchProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
